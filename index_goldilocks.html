@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goldilocks Workshop @ ICLR 2027: Finding “Just Right” in Agentic AI</title>
+<meta name="description" content="Goldilocks' Workshop on Finding “Just Right” in Agentic AI, ICLR 2027, San Francisco. Saturation, allocation and synergy in agentic systems.">
+<meta property="og:title" content="Goldilocks Workshop @ ICLR 2027">
+<meta property="og:description" content="Finding “just right” in agentic AI: saturation, allocation and synergy.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥣</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDEFE4;      /* lichen */
+  --paper-2:#E2E6D5;
+  --ink:#1E2B23;        /* forest */
+  --muted:#4F5B4A;
+  --rule:#C5CBB4;
+  --forest:#22322A;
+  --honey:#E3A72F;      /* just right */
+  --honey-soft:#F5DFA0;
+  --hot:#A63A45;        /* too much */
+  --cold:#3F6587;       /* too little */
+  --bark:#6B4A35;
+  --serif:"Young Serif", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--sans)}
+img{max-width:100%}
+a{color:inherit;text-decoration-color:var(--honey);text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{text-decoration-color:var(--ink)}
+:focus-visible{outline:3px solid var(--honey);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.prose{max-width:68ch}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15;margin:0}
+h2{font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:1.25rem}
+h3{font-size:1.35rem;margin-bottom:.5rem}
+p{margin:0 0 1rem}
+section{padding:4.5rem 0;border-top:1px solid var(--rule)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:10;background:rgba(237,239,228,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;gap:1.5rem;height:3.75rem}
+.brand{font-family:var(--serif);font-size:1.1rem;text-decoration:none;white-space:nowrap}
+.nav ul{display:flex;gap:1.25rem;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav ul a{text-decoration:none;font-size:.95rem;white-space:nowrap;color:var(--muted)}
+.nav ul a:hover{color:var(--ink)}
+
+/* hero */
+.hero{background:var(--forest);color:#EEF0E4;padding:4rem 0 4.5rem}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center}
+.hero h1{font-size:clamp(2.3rem,5vw,3.9rem);letter-spacing:-.01em}
+.hero .lede{font-size:1.15rem;color:#CDD5C6;margin:1.25rem 0 1rem;max-width:46ch}
+.hero .when{color:var(--honey-soft);margin-bottom:1.75rem}
+.btns{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-block;padding:.7rem 1.15rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.98rem}
+.btn-gold{background:var(--honey);color:var(--forest)}
+.btn-gold:hover{background:var(--honey-soft)}
+.btn-line{border:1.5px solid #8A9886;color:#EEF0E4}
+.btn-line:hover{border-color:#EEF0E4}
+
+.curve-fig{margin:0}
+.curve-fig svg{width:100%;height:auto;display:block}
+.curve-fig .axis{stroke:#6F7E6B;stroke-width:1.5}
+.curve-fig .axis-label{fill:#A9B5A4;font:500 13px var(--sans)}
+.curve-fig .zone{fill:var(--honey);opacity:.16}
+.curve-fig .line{fill:none;stroke:#9DAA98;stroke-width:3;stroke-linecap:round}
+.curve-fig .line-gold{fill:none;stroke:var(--honey);stroke-width:5;stroke-linecap:round}
+.curve-fig .zone-label{fill:var(--honey);font:400 15px var(--serif)}
+.curve-fig .drop{stroke:#EEF0E4;stroke-dasharray:3 4;stroke-width:1.2;opacity:.5}
+.curve-fig .dot{fill:#EEF0E4;stroke:var(--forest);stroke-width:3}
+.slider-row{display:flex;align-items:center;gap:1rem;margin-top:.75rem}
+.slider-row label{font-size:.9rem;color:#A9B5A4;white-space:nowrap}
+input[type=range]{flex:1;accent-color:var(--honey);height:1.6rem}
+.readout{min-height:3.4rem;margin-top:.6rem;font-size:1rem;color:#DDE3D6}
+.readout strong{font-family:var(--serif);font-weight:400;font-size:1.2rem;margin-right:.35rem}
+.readout[data-state=cold] strong{color:#93B8DA}
+.readout[data-state=right] strong{color:var(--honey)}
+.readout[data-state=hot] strong{color:#EE9AA2}
+.curve-fig figcaption{font-size:.88rem;color:#A9B5A4;margin-top:.25rem}
+
+/* zones */
+.zones{display:grid;grid-template-columns:repeat(3,1fr);margin-top:2.5rem;border-top:3px solid var(--ink)}
+.zone-col{padding:1.75rem 1.5rem 0 0}
+.zone-col + .zone-col{padding-left:1.5rem;border-left:1px solid var(--rule)}
+.zone-col svg{width:120px;height:80px;color:var(--bark);margin-bottom:1rem}
+.zone-col .story{font-style:italic;color:var(--muted);margin:-.2rem 0 .9rem}
+.zone-col .eg{font-size:.95rem;color:var(--muted);border-left:3px solid var(--honey);padding-left:.8rem}
+
+/* cfp */
+.two{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start}
+table{border-collapse:collapse;width:100%;font-size:.98rem}
+th,td{text-align:left;padding:.6rem .75rem .6rem 0;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:600}
+.statement{background:var(--honey-soft);border-radius:4px;padding:1.4rem 1.5rem;margin:2rem 0}
+.statement h3{font-size:1.25rem}
+.statement blockquote{margin:.8rem 0 0;font-family:var(--serif);font-size:1.1rem;line-height:1.45}
+.statement .ph{background:rgba(255,255,255,.55);padding:0 .25rem;border-radius:3px}
+.topics{margin-top:2.5rem}
+details{border-bottom:1px solid var(--rule)}
+details:first-of-type{border-top:1px solid var(--rule)}
+summary{cursor:pointer;padding:.9rem 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--serif);font-size:1.3rem;line-height:1;color:var(--bark)}
+details[open] summary::after{content:"–"}
+details .body{padding:0 0 1rem;max-width:72ch}
+details .body p{margin-bottom:.6rem}
+.tag{font-weight:600;color:var(--bark)}
+.portal{margin-top:1.5rem;color:var(--muted)}
+.support{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.support div{border-top:2px solid var(--honey);padding-top:.8rem}
+.support .amt{font-family:var(--serif);font-size:1.8rem;display:block}
+
+/* dates */
+.timeline{list-style:none;margin:0;padding:0;max-width:720px}
+.timeline li{display:grid;grid-template-columns:10.5rem 1fr;gap:1.25rem;padding:.85rem 0;border-bottom:1px solid var(--rule);position:relative}
+.timeline time{font-weight:600}
+.timeline li.next{background:linear-gradient(90deg,var(--honey-soft),transparent);margin:0 -1rem;padding-left:1rem;padding-right:1rem}
+.timeline .badge{display:inline-block;margin-left:.5rem;font-size:.8rem;font-weight:600;background:var(--ink);color:var(--paper);border-radius:999px;padding:.05rem .55rem;vertical-align:1px}
+.timeline li.final time,.timeline li.final span{font-family:var(--serif);font-weight:400;font-size:1.15rem}
+.note{font-size:.92rem;color:var(--muted);margin-top:1rem}
+
+/* schedule */
+.sched{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.sched h3{margin-bottom:.75rem}
+.sched td:first-child{width:4.5rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.sched tr.rt td{background:rgba(227,167,47,.18)}
+.sched tr.rt td:first-child{padding-left:.5rem}
+.sched tr.brk td{color:var(--muted);font-style:italic}
+
+/* people */
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2rem 2rem}
+.person{display:grid;grid-template-columns:3.5rem 1fr;gap:.9rem;align-items:start}
+.mono{width:3.5rem;height:3.5rem;border-radius:50%;background:var(--paper-2);border:2px solid var(--honey);display:grid;place-items:center;font-family:var(--serif);font-size:1.15rem;color:var(--bark);overflow:hidden}
+.mono img{width:100%;height:100%;object-fit:cover}
+.person h3{font-size:1.12rem;margin-bottom:.2rem}
+.person p{font-size:.93rem;color:var(--muted);margin:0}
+.speakers .person p.why{margin-top:.5rem;color:var(--ink)}
+.pc{columns:3 14rem;column-gap:2rem;list-style:none;padding:0;margin:0;font-size:.95rem}
+.pc li{padding:.2rem 0;break-inside:avoid}
+.sub{margin-top:3.5rem}
+
+footer{background:var(--forest);color:#CDD5C6;padding:3rem 0;font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem}
+footer a{color:#EEF0E4}
+
+@media (max-width:860px){
+  .hero .wrap,.two,.sched{grid-template-columns:1fr;gap:2rem}
+  .zones{grid-template-columns:1fr}
+  .zone-col,.zone-col + .zone-col{padding:1.75rem 0;border-left:0;border-bottom:1px solid var(--rule)}
+  .support{grid-template-columns:1fr}
+  .timeline li{grid-template-columns:1fr;gap:.15rem}
+  .nav .brand{display:none}
+  .nav ul{margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Goldilocks @ ICLR 2027</a>
+    <ul>
+      <li><a href="#zones">Zones</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#cfp">Call for papers</a></li>
+      <li><a href="#dates">Dates</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#organizers">Organizers</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Goldilocks’ Workshop on Finding “Just Right” in Agentic AI</h1>
+      <p class="lede">Model scale, data, training, inference budgets and agent harnesses interact. Some combinations land in a sweet spot and work surprisingly well. This workshop is about finding those spots, understanding them, and optimizing for them.</p>
+      <p class="when">ICLR 2027, San Francisco. Full day, in person, on 29 or 30 April 2027.</p>
+      <div class="btns">
+        <a class="btn btn-gold" href="#cfp">Read the call for papers</a>
+        <a class="btn btn-line" href="#dates">See key dates</a>
+      </div>
+    </div>
+
+    <figure class="curve-fig">
+      <svg id="curve" viewBox="0 0 600 300" role="img" aria-labelledby="curve-title">
+        <title id="curve-title">An inverted-U performance curve: performance rises with investment, peaks in a shaded just-right zone, then falls.</title>
+      </svg>
+      <div class="slider-row">
+        <label for="invest">How much?</label>
+        <input id="invest" type="range" min="0" max="100" value="8" aria-describedby="readout">
+      </div>
+      <p class="readout" id="readout" aria-live="polite"></p>
+      <figcaption>Slide to add more of anything: reasoning tokens, training steps, human input.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+
+<section id="zones">
+  <div class="wrap">
+    <h2>Three bears, three zones</h2>
+    <p class="prose">A Goldilocks zone shows up in three recurring ways. Each one asks a different question about the same system.</p>
+
+    <div class="zones">
+      <article class="zone-col">
+        <svg viewBox="0 0 120 80" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M44 30c-5-6 5-9 0-16M60 30c-5-6 5-9 0-16M76 30c-5-6 5-9 0-16" stroke="var(--hot)"/>
+          <path d="M18 40H102A42 28 0 0 1 18 40Z" fill="var(--honey-soft)"/>
+          <path d="M50 70H70"/>
+        </svg>
+        <h3>Saturation</h3>
+        <p class="story">Papa Bear’s porridge: hotter is not always better.</p>
+        <p>Spending more on reasoning, training or human intervention eventually stops paying off, and can start to hurt. The zone is the budget that balances performance against cost.</p>
+        <p class="eg">Extra inference-time compute that no longer improves agentic reasoning.</p>
+      </article>
+
+      <article class="zone-col">
+        <svg viewBox="0 0 120 80" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 38H48A21 18 0 0 1 6 38Z" fill="var(--honey-soft)"/>
+          <path d="M55 46H85A15 13 0 0 1 55 46Z" fill="var(--honey-soft)"/>
+          <path d="M92 54H114A11 9 0 0 1 92 54Z" fill="var(--honey-soft)"/>
+          <path d="M4 72H116"/>
+        </svg>
+        <h3>Allocation</h3>
+        <p class="story">Mama Bear’s pot: one pot, three bowls to fill.</p>
+        <p>A fixed budget of tokens, GPUs, annotations or human effort has to be divided across sub-agents or stages. The zone is the split that gets near-optimal results.</p>
+        <p class="eg">Dividing an annotation budget between supervised fine-tuning and RL in post-training.</p>
+      </article>
+
+      <article class="zone-col">
+        <svg viewBox="0 0 120 80" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 70V24M110 70V44"/>
+          <path d="M10 50H110V60H10Z"/>
+          <ellipse cx="26" cy="44" rx="11" ry="5.5" fill="var(--paper-2)"/>
+          <path d="M42 50V42Q76 34 110 42V50" fill="var(--honey-soft)"/>
+        </svg>
+        <h3>Synergy</h3>
+        <p class="story">Baby Bear’s bed: mattress, pillow and quilt only work together.</p>
+        <p>Models, harnesses and tools combine so that the whole beats any part on its own. The zone is the configuration that makes the most of their complementary strengths.</p>
+        <p class="eg">Autonomous research agents paired with structured Bayesian optimization.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap two">
+    <div class="prose">
+      <h2>Why a workshop on this, now</h2>
+      <p>Agentic systems now combine models, reasoning procedures, tools, memory, retrieval, human input, and training and inference pipelines. As the number of interacting parts grows, good configurations get harder to find, and what works in one system often fails to transfer to another.</p>
+      <p>Findings about saturation, allocation and synergy are scattered across papers as isolated ablations and heuristics. Papers report the best setting, but rarely the shape of the optimum, why it exists, where its edges are, or whether it carries over. That makes recurring patterns hard to see.</p>
+      <p>This workshop brings these observations together, and pairs researchers who see Goldilocks zones empirically with those building theory and optimization methods to explain and navigate them.</p>
+    </div>
+    <div class="prose">
+      <h3>What comes out of it</h3>
+      <p>Contributed papers, invited talks and two roundtables feed into a public <strong>Goldilocks Research Agenda</strong>: a lasting reference on the mechanisms behind saturation, allocation and synergy, and on how to find and optimize for these zones.</p>
+      <h3 style="margin-top:1.75rem">Two roundtables</h3>
+      <p><strong>Finding Goldilocks problems</strong> looks at recurring phenomena, their causes and open questions. <strong>Finding Goldilocks solutions</strong> looks at methods to explain, locate, navigate or widen these zones. Each starts with 4 to 6 invited authors, and everyone is welcome to join.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cfp">
+  <div class="wrap">
+    <h2>Call for papers</h2>
+    <div class="two">
+      <div class="prose">
+        <p>We welcome both <strong>Goldilocks problems in agents</strong> and <strong>agents for solving Goldilocks problems</strong> across AI research. That includes empirical problems in models and pipelines that aren’t agentic themselves, and theoretical problems, for example in game theory or in combining classical optimization with agentic workflows.</p>
+        <p>When you submit, choose one of two categories: <strong>Empirical</strong> (identifying and characterizing Goldilocks phenomena) or <strong>Optimization &amp; Theory</strong> (explaining and navigating Goldilocks zones). Empirical posters present in the morning, Optimization &amp; Theory in the afternoon, so you can visit the other session.</p>
+        <p>Reviews focus on clarity, rigor and novelty. For empirical work, we especially value papers that characterize the structure around a zone, not just report a best configuration. The workshop is non-archival; accepted papers stay on the website and OpenReview.</p>
+      </div>
+      <div>
+        <table>
+          <thead><tr><th>Track</th><th>Length</th><th>Opens</th></tr></thead>
+          <tbody>
+            <tr><td>Main, full paper</td><td>Up to 8 pages</td><td>1 Dec 2026</td></tr>
+            <tr><td>Main, short paper</td><td>Up to 4 pages</td><td>1 Dec 2026</td></tr>
+            <tr><td>Tiny papers</td><td>Up to 2 pages</td><td>1 Dec 2026</td></tr>
+            <tr><td>Collaboration</td><td>Up to 2 pages</td><td>1 Apr 2027</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Page limits exclude references and appendices. Collaboration Track papers build on an accepted workshop paper, with at least one original author and one new collaborator. Early-stage ideas without experiments are welcome.</p>
+      </div>
+    </div>
+
+    <div class="statement">
+      <h3>Begin with a Goldilocks statement</h3>
+      <p class="prose" style="margin:0">Every submission opens with one sentence naming what is being varied, what goes wrong with too little and too much of it, and the middle ground the paper studies.</p>
+      <blockquote>“Too little <span class="ph">[X]</span> leads to <span class="ph">[outcome A]</span>, whereas too much <span class="ph">[X]</span> leads to <span class="ph">[outcome B]</span>; this paper investigates how to identify or achieve an intermediate level that <span class="ph">[desired outcome]</span>.”</blockquote>
+    </div>
+
+    <div class="topics">
+      <h3>Topics include, but are not limited to</h3>
+      <details>
+        <summary>Saturation in agents</summary>
+        <div class="body">
+          <p><span class="tag">Empirical.</span> Along which axes (inference-time compute, training duration, context or memory size, model scale, autonomy, human intervention) do returns flatten or reverse, and what failures appear past the useful range?</p>
+          <p><span class="tag">Theoretical.</span> Under what assumptions does such a range exist, and how can optimal stopping or adaptive methods locate and track it as tasks, models or environments change?</p>
+        </div>
+      </details>
+      <details>
+        <summary>Allocation in agents</summary>
+        <div class="body">
+          <p><span class="tag">Empirical.</span> Under a fixed budget, how should compute, data, rollouts, context tokens, tool calls or human effort be divided across agents, tasks, stages and components? How do good allocations shift with capability, difficulty or budget?</p>
+          <p><span class="tag">Theoretical.</span> What principles and algorithms characterize optimal allocations, and what scaling laws or invariances let them transfer across model scales, tasks or budgets?</p>
+        </div>
+      </details>
+      <details>
+        <summary>Synergy in agents</summary>
+        <div class="body">
+          <p><span class="tag">Empirical.</span> Which combinations of agents, models, tools, memory, retrieval, search or human input are complementary or antagonistic? Which ablations or factorial experiments separate real interaction effects from simply stronger components?</p>
+          <p><span class="tag">Theoretical.</span> How can complementarity or interference be formalized, and how can an optimizer find productive combinations without evaluating them all?</p>
+        </div>
+      </details>
+      <details>
+        <summary>Characterization and validation</summary>
+        <div class="body"><p>Which signals (uncertainty, diversity, latency, marginal gains) show a system entering or leaving a Goldilocks zone? How can its geometry be characterized, and how can real structure be told apart from optima caused by noise or small evaluation budgets?</p></div>
+      </details>
+      <details>
+        <summary>Generalization and redesign</summary>
+        <div class="body"><p>How stable are Goldilocks zones across agent configurations, model scales, datasets, domains, distribution shift and deployment constraints? Which sweet spots transfer? Can design shift, widen or remove their boundaries, for instance by delaying saturation or enabling new synergies?</p></div>
+      </details>
+      <details>
+        <summary>Efficient optimization</summary>
+        <div class="body"><p>How can multi-fidelity, Bayesian or bi-level optimization, or adaptive experimental design, locate Goldilocks zones when configurations are expensive, noisy, high-dimensional, combinatorial or interacting? What makes these zones identifiable from limited observations?</p></div>
+      </details>
+      <details>
+        <summary>Agents for empirical and theoretical discovery</summary>
+        <div class="body"><p>How can agents propose hypotheses, run experiments and analyze results to discover and explain saturation, allocation and synergy in training, data selection, inference and model composition? How can they form conjectures and develop proofs or counterexamples for problems like resource allocation or equilibrium analysis? How are findings reproduced and verified?</p></div>
+      </details>
+      <details>
+        <summary>Agents for optimization across AI</summary>
+        <div class="body"><p>How can agents, alone or with structured search, find, track or improve Goldilocks zones, including outside agentic systems? How do they compare with non-agentic methods at matched budgets, and what guarantees hold for search efficiency or solution quality?</p></div>
+      </details>
+    </div>
+
+    <!-- TODO: replace with your OpenReview link once the venue is created -->
+    <p class="portal">Submissions will open on OpenReview on 1 December 2026. Use the ICLR 2027 author kit.</p>
+
+    <div class="support">
+      <div><span class="amt">US$1,000</span>Best paper awards, Main and Tiny Papers tracks</div>
+      <div><span class="amt">US$500</span>Best paper awards, Collaboration Track</div>
+      <div><span class="amt">US$4,000</span>Travel grants for attendees who need support, with priority for early-career researchers</div>
+    </div>
+  </div>
+</section>
+
+<section id="dates">
+  <div class="wrap">
+    <h2>Key dates</h2>
+    <ol class="timeline">
+      <li data-date="2026-12-01"><time datetime="2026-12-01">1 Dec 2026</time><span>Call for papers, Main and Tiny Papers tracks</span></li>
+      <li data-date="2027-02-01"><time datetime="2027-02-01">1 Feb 2027</time><span>Submission deadline, Main and Tiny Papers tracks</span></li>
+      <li data-date="2027-02-26"><time datetime="2027-02-26">26 Feb 2027</time><span>Decisions and reviews released, accepted papers public on OpenReview</span></li>
+      <li data-date="2027-04-01"><time datetime="2027-04-01">1 Apr 2027</time><span>Camera-ready papers and posters due, full program posted, Collaboration Track opens</span></li>
+      <li data-date="2027-04-28"><time datetime="2027-04-28">28 Apr 2027</time><span>Collaboration Track deadline</span></li>
+      <li data-date="2027-04-29"><time datetime="2027-04-29">29 Apr 2027</time><span>Collaboration Track decisions</span></li>
+      <li data-date="2027-04-30" class="final"><time datetime="2027-04-29">29 or 30 Apr 2027</time><span>Workshop day in San Francisco</span></li>
+    </ol>
+    <p class="note">All deadlines are Anywhere on Earth (AoE). The workshop day will be set by ICLR.</p>
+  </div>
+</section>
+
+<section id="schedule">
+  <div class="wrap">
+    <h2>Tentative program</h2>
+    <p class="prose">Times are Pacific Daylight Time. Invited talks are 20 minutes and spotlights 10 minutes, each followed by 5 minutes of questions.</p>
+    <div class="sched">
+      <div>
+        <h3>Morning</h3>
+        <table>
+          <tbody>
+            <tr><td>08:15</td><td>Opening remarks</td></tr>
+            <tr><td>08:30</td><td>Invited talk 1</td></tr>
+            <tr><td>08:55</td><td>Invited talk 2</td></tr>
+            <tr class="brk"><td>09:20</td><td>Coffee break</td></tr>
+            <tr><td>09:40</td><td>Spotlight talk 1</td></tr>
+            <tr><td>09:55</td><td>Spotlight talk 2</td></tr>
+            <tr><td>10:10</td><td>Poster session 1: Empirical</td></tr>
+            <tr class="rt"><td>11:10</td><td>Roundtable 1: Finding Goldilocks problems</td></tr>
+            <tr class="brk"><td>12:30</td><td>Lunch</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Afternoon</h3>
+        <table>
+          <tbody>
+            <tr><td>13:30</td><td>Spotlight talk 3</td></tr>
+            <tr><td>13:45</td><td>Spotlight talk 4</td></tr>
+            <tr><td>14:00</td><td>Poster session 2: Optimization &amp; Theory</td></tr>
+            <tr class="rt"><td>15:15</td><td>Roundtable 2: Finding Goldilocks solutions</td></tr>
+            <tr class="brk"><td>16:30</td><td>Coffee break</td></tr>
+            <tr><td>16:50</td><td>Invited talk 3</td></tr>
+            <tr><td>17:15</td><td>Invited talk 4</td></tr>
+            <tr><td>17:40</td><td>Best paper prizes</td></tr>
+            <tr><td>17:50</td><td>Closing remarks</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="speakers" class="speakers">
+  <div class="wrap">
+    <h2>Invited speakers</h2>
+    <!-- To use a photo, replace the initials inside .mono with <img src="img/name.jpg" alt=""> -->
+    <div class="people">
+      <div class="person"><div class="mono">MT</div><div>
+        <h3>Milind Tambe</h3>
+        <p>Harvard University and Google DeepMind</p>
+        <p class="why">Decision-focused learning and multi-agent systems: when better predictions stop improving decisions, and how to divide limited resources.</p>
+      </div></div>
+      <div class="person"><div class="mono">MV</div><div>
+        <h3>Manuela Veloso</h3>
+        <p>Carnegie Mellon University</p>
+        <p class="why">Autonomous and multi-agent systems: continual learning, planning and coordination.</p>
+      </div></div>
+      <div class="person"><div class="mono">MB</div><div>
+        <h3>Max Balandat</h3>
+        <p>Atomic Machines</p>
+        <p class="why">Bayesian optimization (BoTorch, Ax) and its synergy with language models.</p>
+      </div></div>
+      <div class="person"><div class="mono">AB</div><div>
+        <h3>Antoine Bosselut</h3>
+        <p>EPFL</p>
+        <p class="why">How representations evolve during LLM pretraining, and allocating pretraining resources across languages.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="organizers">
+  <div class="wrap">
+    <h2>Organizers</h2>
+    <div class="people">
+      <div class="person"><div class="mono">BL</div><div><h3>Bryan Kian Hsiang Low</h3><p>National University of Singapore</p></div></div>
+      <div class="person"><div class="mono">TY</div><div><h3>Teresa Yeo</h3><p>Google DeepMind</p></div></div>
+      <div class="person"><div class="mono">ZD</div><div><h3>Zhongxiang Dai</h3><p>CUHK-Shenzhen</p></div></div>
+      <div class="person"><div class="mono">CL</div><div><h3>Chun Kai Ling</h3><p>National University of Singapore</p></div></div>
+      <div class="person"><div class="mono">DC</div><div><h3>Davin Choo</h3><p>Harvard SEAS</p></div></div>
+      <div class="person"><div class="mono">AV</div><div><h3>Arun Verma</h3><p>Singapore-MIT Alliance for Research and Technology</p></div></div>
+      <div class="person"><div class="mono">LN</div><div><h3>Lynnette Ng</h3><p>DSTA</p></div></div>
+      <div class="person"><div class="mono">ZK</div><div><h3>Zi-Yu Khoo</h3><p>National University of Singapore and AI Singapore</p></div></div>
+    </div>
+
+    <div class="sub">
+      <h3>Program committee</h3>
+      <ul class="pc">
+        <li>Rachael Hwee Ling Sim</li><li>Zhan Wei Lim</li><li>Ryan Wei Heng Quek</li><li>Quang Thanh Tran</li>
+        <li>Ruth Wan Theng Chew</li><li>Zhiliang Chen</li><li>Joseph Tze Tzun Teoh</li><li>Alfred Wei Lun Leong</li>
+        <li>Shao Yong Ong</li><li>Huynh Minh Nguyen</li><li>Jiabao Pan</li><li>Hoang Long Vu</li>
+        <li>Zixuan Wang</li><li>Jue Fan</li><li>Xiao Tian</li><li>Weida Li</li>
+        <li>Nhung Bui</li><li>Cong Duc Hoang</li><li>Hieu Dao</li><li>Kieu Thao Nguyen Pham</li>
+        <li>Zijian Zhou</li><li>Gregory Kang Ruey Lau</li><li>Zhuanghua Liu</li><li>Jingtan Wang</li>
+        <li>Apivich Hemachandra</li><li>Xinyuan Niu</li><li>Jiangwei Chen</li><li>Xinyang Lu</li>
+        <li>Wenyang Hu</li><li>Manh Cuong Dao</li><li>Rui Qiao</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap prose">
+    <h2>Contact</h2>
+    <!-- TODO: replace with your real address -->
+    <p>Questions about submissions, reviewing or attending? Email the organizers at <a href="mailto:goldilocks.workshop@example.com">goldilocks.workshop@example.com</a>.</p>
+    <p>Recordings of talks will be shared after the workshop with speakers’ consent. Remote presentation is possible in exceptional circumstances.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Goldilocks’ Workshop on Finding “Just Right” in Agentic AI, ICLR 2027.</p>
+    <p><a href="https://iclr.cc">ICLR conference site</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- hero curve ---------- */
+  var svg = document.getElementById('curve');
+  var NS = 'http://www.w3.org/2000/svg';
+  var W = 600, H = 300, P = {l:40, r:20, t:30, b:40};
+  var k = 0.45, THRESH = 0.97;
+  function f(x){ var t = x / k; return t * Math.exp(1 - t); }
+  function sx(x){ return P.l + x * (W - P.l - P.r); }
+  function sy(y){ return H - P.b - y * (H - P.t - P.b) * 0.92; }
+  function el(name, attrs){ var e = document.createElementNS(NS, name); for (var a in attrs) e.setAttribute(a, attrs[a]); svg.appendChild(e); return e; }
+
+  var lo = null, hi = null, pts = [], gold = [];
+  for (var i = 0; i <= 200; i++){
+    var x = i / 200, y = f(x);
+    pts.push(sx(x).toFixed(1) + ',' + sy(y).toFixed(1));
+    if (y >= THRESH){ if (lo === null) lo = x; hi = x; gold.push(sx(x).toFixed(1) + ',' + sy(y).toFixed(1)); }
+  }
+  el('rect', {class:'zone', x:sx(lo), y:P.t - 10, width:sx(hi) - sx(lo), height:H - P.b - P.t + 10});
+  var zl = el('text', {class:'zone-label', x:(sx(lo) + sx(hi)) / 2, y:P.t + 2, 'text-anchor':'middle'}); zl.textContent = 'just right';
+  el('line', {class:'axis', x1:P.l, y1:H - P.b, x2:W - P.r, y2:H - P.b});
+  el('line', {class:'axis', x1:P.l, y1:P.t - 10, x2:P.l, y2:H - P.b});
+  var xl = el('text', {class:'axis-label', x:W - P.r, y:H - 14, 'text-anchor':'end'}); xl.textContent = 'investment';
+  var yl = el('text', {class:'axis-label', x:P.l + 8, y:P.t - 14}); yl.textContent = 'performance';
+  el('polyline', {class:'line', points:pts.join(' ')});
+  el('polyline', {class:'line-gold', points:gold.join(' ')});
+  var drop = el('line', {class:'drop', x1:0, y1:0, x2:0, y2:H - P.b});
+  var dot = el('circle', {class:'dot', r:9, cx:0, cy:0});
+
+  var slider = document.getElementById('invest');
+  var out = document.getElementById('readout');
+  var lastState = '';
+  var msgs = {
+    cold:['Too cold.', 'Performance is still climbing, so more investment pays off.'],
+    right:['Just right.', 'Near-peak performance for the resources spent.'],
+    hot:['Too hot.', 'Extra investment has stopped helping and starts to hurt.']
+  };
+  function update(){
+    var x = slider.value / 100, cx = sx(x), cy = sy(f(x));
+    dot.setAttribute('cx', cx); dot.setAttribute('cy', cy);
+    drop.setAttribute('x1', cx); drop.setAttribute('x2', cx); drop.setAttribute('y1', cy);
+    var state = x < lo ? 'cold' : (x > hi ? 'hot' : 'right');
+    dot.style.fill = state === 'right' ? 'var(--honey)' : '#EEF0E4';
+    if (state !== lastState){
+      out.dataset.state = state;
+      out.innerHTML = '<strong>' + msgs[state][0] + '</strong>' + msgs[state][1];
+      lastState = state;
+    }
+  }
+  slider.addEventListener('input', function(){ stopped = true; update(); });
+  update();
+
+  /* one load-time moment: glide the dot into the zone */
+  var stopped = false;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce){
+    var start = null, from = 8, to = Math.round(((lo + hi) / 2) * 100), dur = 1800;
+    setTimeout(function(){
+      requestAnimationFrame(function step(ts){
+        if (stopped) return;
+        if (!start) start = ts;
+        var p = Math.min(1, (ts - start) / dur), e = 1 - Math.pow(1 - p, 3);
+        slider.value = Math.round(from + (to - from) * e);
+        update();
+        if (p < 1) requestAnimationFrame(step);
+      });
+    }, 600);
+  } else {
+    slider.value = Math.round(((lo + hi) / 2) * 100); update();
+  }
+
+  /* ---------- highlight the next date ---------- */
+  var today = new Date(); today.setHours(0,0,0,0);
+  var items = document.querySelectorAll('.timeline li');
+  for (var j = 0; j < items.length; j++){
+    var d = new Date(items[j].getAttribute('data-date') + 'T23:59:59');
+    if (d >= today){
+      items[j].classList.add('next');
+      var b = document.createElement('span'); b.className = 'badge'; b.textContent = 'Next';
+      items[j].querySelector('time').appendChild(b);
+      break;
+    }
+  }
+})();
+</script>
+</body>
+</html>
