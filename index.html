@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Goldilocks Workshop @ ICLR 2027: Finding “Just Right” in Agentic AI</title>
-<meta name="description" content="Goldilocks' Workshop on Finding “Just Right” in Agentic AI, ICLR 2027, San Francisco. Saturation, allocation and synergy in agentic systems.">
-<meta property="og:title" content="Goldilocks Workshop @ ICLR 2027">
-<meta property="og:description" content="Finding “just right” in agentic AI: saturation, allocation and synergy.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥣</text></svg>">
+<title>Goldilocks Workshop Proposal, ICLR 2027</title>
+<meta name="description" content="Proposal for Goldilocks' Workshop on Finding “Just Right” in AI at ICLR 2027, San Francisco. Saturation, allocation and synergy in agentic systems.">
+<meta property="og:title" content="Goldilocks Workshop Proposal, ICLR 2027">
+<meta property="og:description" content="Finding “just right” in AI: saturation, allocation and synergy.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#EDEFE4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -15,149 +16,324 @@
 :root{
   --paper:#EDEFE4;      /* lichen */
   --paper-2:#E2E6D5;
+  --card:#F7F8F1;
   --ink:#1E2B23;        /* forest */
   --muted:#4F5B4A;
   --rule:#C5CBB4;
+  --line:rgba(30,43,35,.09);
   --forest:#22322A;
+  --forest-2:#2B3E33;
+  --cream:#EEF0E4;
   --honey:#E3A72F;      /* just right */
   --honey-soft:#F5DFA0;
+  --honey-ink:#94600A;  /* honey dark enough for text on paper */
   --hot:#A63A45;        /* too much */
   --cold:#3F6587;       /* too little */
   --bark:#6B4A35;
+  --radius:16px;
+  --shadow:0 1px 2px rgba(30,43,35,.05),0 8px 24px -12px rgba(30,43,35,.2);
+  --shadow-lg:0 2px 4px rgba(30,43,35,.05),0 24px 48px -20px rgba(30,43,35,.34);
   --serif:"Young Serif", Georgia, "Times New Roman", serif;
   --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* icons, used as masks */
+  --i-cal:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4.5' width='18' height='16.5' rx='2.5'/%3E%3Cpath d='M3 9.5h18M8 2.5v4M16 2.5v4'/%3E%3C/svg%3E");
+  --i-info:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9.5'/%3E%3Cpath d='M12 11v6'/%3E%3Ccircle cx='12' cy='7.5' r='.6' fill='black'/%3E%3C/svg%3E");
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--sans)}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
 img{max-width:100%}
-a{color:inherit;text-decoration-color:var(--honey);text-decoration-thickness:2px;text-underline-offset:3px}
+a{color:inherit;text-decoration-color:var(--honey);text-decoration-thickness:2px;text-underline-offset:3px;transition:color .15s,text-decoration-color .15s}
 a:hover{text-decoration-color:var(--ink)}
 :focus-visible{outline:3px solid var(--honey);outline-offset:3px;border-radius:2px}
-.wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
-.prose{max-width:68ch}
-h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15;margin:0}
-h2{font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:1.25rem}
+::selection{background:var(--honey-soft);color:var(--ink)}
+.wrap{max-width:1140px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15;margin:0;text-wrap:balance}
+h2{font-size:clamp(2rem,3.8vw,2.8rem);margin-bottom:1.4rem;letter-spacing:-.015em}
 h3{font-size:1.35rem;margin-bottom:.5rem}
-p{margin:0 0 1rem}
-section{padding:4.5rem 0;border-top:1px solid var(--rule)}
+p{margin:0 0 1rem;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+/* no text-wrap:pretty on justified text: it pulls words onto the last line and stretches the gaps above */
+/* narrow boxes are too short a measure to justify, so they stay ragged */
+.hero p,.zone-col p,.note,.portal,footer p{text-align:left;hyphens:manual;-webkit-hyphens:manual;text-wrap:pretty}
+strong{font-weight:600}
+
+/* sections: alternating bands */
+section{padding:6rem 0}
+main section:nth-of-type(even){background:var(--paper-2)}
+/* too little, just right, too much */
 
 /* nav */
-.nav{position:sticky;top:0;z-index:10;background:rgba(237,239,228,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
-.nav .wrap{display:flex;align-items:center;gap:1.5rem;height:3.75rem}
-.brand{font-family:var(--serif);font-size:1.1rem;text-decoration:none;white-space:nowrap}
-.nav ul{display:flex;gap:1.25rem;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none}
+.nav{position:sticky;top:0;z-index:10;background:rgba(222,227,207,.9);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s,box-shadow .2s}
+.nav.scrolled{border-bottom-color:var(--line);box-shadow:0 10px 30px -22px rgba(30,43,35,.6)}
+.nav .wrap{display:flex;align-items:center;gap:1.5rem;height:4rem}
+.brand{font-family:var(--serif);font-size:1.12rem;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:.55rem}
+.brand svg{width:1.75rem;height:1.75rem;flex:none;margin-top:-.15rem;transition:transform .3s}
+.brand:hover svg{transform:rotate(-8deg)}
+.nav ul{position:relative;display:flex;gap:.2rem;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none}
 .nav ul::-webkit-scrollbar{display:none}
-.nav ul a{text-decoration:none;font-size:.95rem;white-space:nowrap;color:var(--muted)}
-.nav ul a:hover{color:var(--ink)}
+.nav ul.fade-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 2.5rem),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 2.5rem),transparent)}
+.nav ul.fade-l{-webkit-mask-image:linear-gradient(90deg,transparent,#000 2.5rem);mask-image:linear-gradient(90deg,transparent,#000 2.5rem)}
+.nav ul.fade-l.fade-r{-webkit-mask-image:linear-gradient(90deg,transparent,#000 2.5rem calc(100% - 2.5rem),transparent);mask-image:linear-gradient(90deg,transparent,#000 2.5rem calc(100% - 2.5rem),transparent)}
+.nav ul a{display:block;text-decoration:none;font-size:.93rem;white-space:nowrap;color:var(--muted);padding:.4rem .75rem;border-radius:999px;transition:background .15s,color .15s}
+.nav ul a:hover{color:var(--ink);background:rgba(30,43,35,.06)}
+.nav ul a:focus-visible{outline-offset:-3px}
+.nav ul a.active{color:var(--ink);background:var(--honey-soft)}
 
 /* hero */
-.hero{background:var(--forest);color:#EEF0E4;padding:4rem 0 4.5rem}
-.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center}
-.hero h1{font-size:clamp(2.3rem,5vw,3.9rem);letter-spacing:-.01em}
-.hero .lede{font-size:1.15rem;color:#CDD5C6;margin:1.25rem 0 1rem;max-width:46ch}
-.hero .when{color:var(--honey-soft);margin-bottom:1.75rem}
+.hero{position:relative;overflow:hidden;color:var(--cream);padding:4.5rem 0 6rem;
+  background:
+    radial-gradient(1000px 540px at 88% 70%,rgba(227,167,47,.2),transparent 62%),
+    radial-gradient(760px 520px at -8% 110%,rgba(63,101,135,.3),transparent 60%),
+    linear-gradient(180deg,#1C2A22,var(--forest) 55%)}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(238,240,228,.07) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(180deg,#000,transparent 85%);-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);pointer-events:none}
+/* bottom edge curves like the rim of a bowl */
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3rem;background:radial-gradient(50% 100% at 50% 0,transparent calc(100% - 1px),var(--paper) 100%);pointer-events:none}
+.hero .wrap{position:relative}
+.hero-logo{display:block;width:clamp(200px,28vw,300px);height:auto;margin:-.75rem 0 1rem -1rem}
+.eyebrow{display:inline-flex;align-items:center;gap:.65rem;margin:0 0 1.75rem;padding:.3rem 1rem .3rem .35rem;border:1px solid rgba(238,240,228,.16);border-radius:999px;background:rgba(238,240,228,.05);font-size:.88rem;color:#D5DCCE}
+.eyebrow span{font-weight:600;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--forest);background:var(--honey);border-radius:999px;padding:.22rem .65rem}
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.25rem);letter-spacing:-.02em;line-height:1.04}
+.hero h1 .pre{display:block;font-size:.5em;line-height:1.2;letter-spacing:-.005em;color:#C3CDBC;margin-bottom:.3em}
+.hero h1 em{font-style:normal;color:var(--honey);white-space:nowrap}
+.hero-grid{display:grid;grid-template-columns:1fr 1.08fr;gap:4rem;align-items:center;margin-top:2.75rem}
+.hero .lede{font-size:1.2rem;color:#D5DCCE;margin:0 0 1.5rem;max-width:44ch}
+.hero .when{display:flex;gap:.7rem;align-items:flex-start;color:#B9C4B3;font-size:.95rem;margin:0 0 2.25rem;max-width:50ch}
+.hero .when::before{content:"";flex:none;width:1.1rem;height:1.1rem;margin-top:.22rem;background:var(--honey);-webkit-mask:var(--i-cal) center/contain no-repeat;mask:var(--i-cal) center/contain no-repeat}
 .btns{display:flex;flex-wrap:wrap;gap:.75rem}
-.btn{display:inline-block;padding:.7rem 1.15rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.98rem}
-.btn-gold{background:var(--honey);color:var(--forest)}
-.btn-gold:hover{background:var(--honey-soft)}
-.btn-line{border:1.5px solid #8A9886;color:#EEF0E4}
-.btn-line:hover{border-color:#EEF0E4}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.4rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.98rem;transition:transform .15s,background .15s,border-color .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-gold{background:var(--honey);color:var(--forest);box-shadow:0 10px 28px -12px rgba(227,167,47,.9),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-gold::after{content:"→";transition:transform .15s}
+.btn-gold:hover{background:#ECB64A}
+.btn-gold:hover::after{transform:translateX(3px)}
+.btn-line{border:1.5px solid rgba(238,240,228,.3);color:var(--cream);background:rgba(238,240,228,.03)}
+.btn-line:hover{border-color:var(--cream);background:rgba(238,240,228,.08)}
 
-.curve-fig{margin:0}
-.curve-fig svg{width:100%;height:auto;display:block}
-.curve-fig .axis{stroke:#6F7E6B;stroke-width:1.5}
-.curve-fig .axis-label{fill:#A9B5A4;font:500 13px var(--sans)}
-.curve-fig .zone{fill:var(--honey);opacity:.16}
-.curve-fig .line{fill:none;stroke:#9DAA98;stroke-width:3;stroke-linecap:round}
-.curve-fig .line-gold{fill:none;stroke:var(--honey);stroke-width:5;stroke-linecap:round}
-.curve-fig .zone-label{fill:var(--honey);font:400 15px var(--serif)}
-.curve-fig .drop{stroke:#EEF0E4;stroke-dasharray:3 4;stroke-width:1.2;opacity:.5}
-.curve-fig .dot{fill:#EEF0E4;stroke:var(--forest);stroke-width:3}
-.slider-row{display:flex;align-items:center;gap:1rem;margin-top:.75rem}
-.slider-row label{font-size:.9rem;color:#A9B5A4;white-space:nowrap}
-input[type=range]{flex:1;accent-color:var(--honey);height:1.6rem}
-.readout{min-height:3.4rem;margin-top:.6rem;font-size:1rem;color:#DDE3D6}
-.readout strong{font-family:var(--serif);font-weight:400;font-size:1.2rem;margin-right:.35rem}
+.curve-fig{margin:0;padding:1.5rem 1.6rem 1.25rem;border-radius:22px;background:linear-gradient(180deg,rgba(238,240,228,.075),rgba(238,240,228,.03));border:1px solid rgba(238,240,228,.13);box-shadow:0 40px 80px -40px rgba(0,0,0,.65),inset 0 1px 0 rgba(238,240,228,.07)}
+.curve-fig svg{width:100%;height:auto;display:block;overflow:visible}
+.curve-fig .axis{fill:none;stroke:#6F7E6B;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.curve-fig .axis-label{fill:#A9B5A4;font:600 max(11px,calc(9px * var(--u,1))) var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.curve-fig .zone{fill:url(#zone-grad)}
+.curve-fig .zone-edge{stroke:var(--honey);stroke-width:1;stroke-dasharray:2 4;opacity:.45}
+.curve-fig .line{fill:none;stroke:url(#curve-grad);stroke-width:3;stroke-linecap:round}
+.curve-fig .line-gold{fill:none;stroke:var(--honey);stroke-width:5;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(227,167,47,.55))}
+.curve-fig .zone-label{fill:var(--honey);font:400 max(16px,calc(12.5px * var(--u,1))) var(--serif)}
+.curve-fig .side-label{font:400 max(14px,calc(11px * var(--u,1))) var(--serif);opacity:.9}
+.curve-fig .side-label.cold{fill:#93B8DA}
+.curve-fig .side-label.hot{fill:#EE9AA2}
+.curve-fig .drop{stroke:var(--cream);stroke-dasharray:3 4;stroke-width:1.2;opacity:.45}
+.curve-fig .dot{fill:var(--cream);stroke:var(--forest);stroke-width:3;transition:fill .2s}
+.curve-fig[data-state=right] .dot{fill:var(--honey)}
+.curve-fig .halo{fill:var(--honey);opacity:0;transform-box:fill-box;transform-origin:center}
+.curve-fig[data-state=right] .halo{animation:halo 2.4s ease-out infinite}
+@keyframes halo{from{opacity:.5;transform:scale(1)}to{opacity:0;transform:scale(2.6)}}
+.readout{min-height:1.9rem;margin:.7rem 0 0;font-size:1rem;color:#DDE3D6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.readout strong{font-family:var(--serif);font-weight:400;font-size:1.25rem;margin-right:.4rem}
 .readout[data-state=cold] strong{color:#93B8DA}
 .readout[data-state=right] strong{color:var(--honey)}
 .readout[data-state=hot] strong{color:#EE9AA2}
-.curve-fig figcaption{font-size:.88rem;color:#A9B5A4;margin-top:.25rem}
+.curve-fig figcaption{font-size:.85rem;color:#A9B5A4;margin-top:.7rem;padding-top:.8rem;border-top:1px solid rgba(238,240,228,.1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* cards (shared) */
+.zone-col,.panel,.person,.sched > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+/* cards rise into place as they scroll into view */
+@supports (animation-timeline:view()){
+  .zone-col,.person,.sched > div{animation:rise linear both;animation-timeline:view();animation-range:entry 5% cover 22%}
+}
+@keyframes rise{from{opacity:0;translate:0 24px}to{opacity:1;translate:0 0}}
 
 /* zones */
-.zones{display:grid;grid-template-columns:repeat(3,1fr);margin-top:2.5rem;border-top:3px solid var(--ink)}
-.zone-col{padding:1.75rem 1.5rem 0 0}
-.zone-col + .zone-col{padding-left:1.5rem;border-left:1px solid var(--rule)}
-.zone-col svg{width:120px;height:80px;color:var(--bark);margin-bottom:1rem}
-.zone-col .story{font-style:italic;color:var(--muted);margin:-.2rem 0 .9rem}
-.zone-col .eg{font-size:.95rem;color:var(--muted);border-left:3px solid var(--honey);padding-left:.8rem}
+#zones h2 + p{font-size:1.15rem}
+.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.zone-col{--accent:var(--honey);display:flex;flex-direction:column;padding:1.9rem 1.75rem 1.75rem;border-top:4px solid var(--accent);transition:transform .2s,box-shadow .2s}
+.zone-col:nth-child(1){--accent:var(--hot)}
+.zone-col:nth-child(3){--accent:var(--cold)}
+.zone-col:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.zone-col svg{flex:none;width:132px;height:88px;color:var(--bark);display:block;margin:0 0 1.4rem;padding:.45rem;border-radius:14px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.zone-col h3{font-size:1.65rem;margin-bottom:.2rem}
+.zone-col .story{font-style:italic;color:var(--muted);margin:0 0 1rem}
+.zone-col .eg{margin:auto 0 0;font-size:.92rem;line-height:1.6;color:var(--muted);background:var(--paper);border-left:3px solid var(--accent);padding:.8rem .95rem .85rem;border-radius:0 10px 10px 0}
+.zone-col .eg::before{content:"Example";display:block;margin-bottom:.3rem;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--bark)}
+
+/* about */
+#about .two{grid-template-columns:1.1fr 1fr;gap:4rem}
+#about .wrap.two > div:last-child{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:2.25rem 2.25rem 1.25rem}
+#about .wrap.two > div:last-child h3:not(:first-child){padding-top:1.5rem;border-top:1px solid var(--line)}
+#about h3{color:var(--forest)}
+#about ol{list-style:none;counter-reset:aim;margin:1.25rem 0 0;padding:0}
+#about ol li{counter-increment:aim;position:relative;padding:1rem 0 1rem 3.4rem;border-top:1px solid var(--line)}
+#about ol li:last-child{border-bottom:1px solid var(--line)}
+#about ol li::before{content:counter(aim,decimal-leading-zero);position:absolute;left:0;top:.9rem;font:400 1.5rem/1.1 var(--serif);color:var(--honey-ink)}
 
 /* cfp */
-.two{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start}
+.two{display:grid;grid-template-columns:1.2fr 1fr;gap:3.5rem;align-items:start}
+@media (min-width:861px) and (min-height:760px){#cfp .two > div:last-child{position:sticky;top:5.5rem}}
+@media (min-width:861px) and (max-width:1120px){#cfp .two p{text-align:left;hyphens:manual;-webkit-hyphens:manual;text-wrap:pretty}}
 table{border-collapse:collapse;width:100%;font-size:.98rem}
-th,td{text-align:left;padding:.6rem .75rem .6rem 0;border-bottom:1px solid var(--rule);vertical-align:top}
+th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
 th{font-weight:600}
-.statement{background:var(--honey-soft);border-radius:4px;padding:1.4rem 1.5rem;margin:2rem 0}
-.statement h3{font-size:1.25rem}
-.statement blockquote{margin:.8rem 0 0;font-family:var(--serif);font-size:1.1rem;line-height:1.45}
-.statement .ph{background:rgba(255,255,255,.55);padding:0 .25rem;border-radius:3px}
-.topics{margin-top:2.5rem}
-details{border-bottom:1px solid var(--rule)}
-details:first-of-type{border-top:1px solid var(--rule)}
-summary{cursor:pointer;padding:.9rem 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+#cfp table{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+#cfp thead th{background:var(--forest);color:var(--honey-soft);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+#cfp tbody tr:hover td{background:rgba(227,167,47,.08)}
+#cfp table{font-size:.94rem}
+#cfp th,#cfp td{padding:.75rem .7rem}
+#cfp td{border-bottom-color:var(--line)}
+#cfp th:first-child,#cfp td:first-child{padding-left:1.1rem}
+#cfp td:last-child{font-weight:600;color:var(--bark)}
+@media (min-width:480px){#cfp td:not(:first-child),#cfp th{white-space:nowrap}}
+.statement{position:relative;background:linear-gradient(135deg,var(--honey-soft),#F9E9BC 60%,#FBF0CF);border:1px solid rgba(201,146,30,.22);border-radius:var(--radius);padding:2.25rem 2.25rem 2rem;margin:3.5rem 0;box-shadow:var(--shadow);overflow:hidden}
+.statement::before{content:"“";position:absolute;right:1.75rem;top:.75rem;font:400 9rem/1 var(--serif);color:rgba(107,74,53,.12);pointer-events:none}
+.statement h3{font-size:1.45rem}
+.statement blockquote{margin:1rem 0 0;padding-left:1rem;border-left:3px solid var(--bark);font-family:var(--serif);font-size:1.1rem;line-height:1.5}
+.statement .ph{background:rgba(255,255,255,.65);padding:0 .3rem;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.topics{margin-top:3.5rem}
+.topics h3{margin-bottom:1rem}
+details{background:var(--card);border-radius:12px;margin-bottom:.6rem;box-shadow:0 1px 2px rgba(30,43,35,.05);border:1px solid var(--line);transition:border-color .15s,box-shadow .15s}
+details:hover{border-color:var(--rule)}
+details[open]{border-color:var(--honey);box-shadow:var(--shadow)}
+summary{cursor:pointer;padding:1.05rem 1.25rem;font-weight:600;list-style:none;display:flex;align-items:center;gap:1rem}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";font-family:var(--serif);font-size:1.3rem;line-height:1;color:var(--bark)}
-details[open] summary::after{content:"–"}
-details .body{padding:0 0 1rem;max-width:72ch}
+summary::after{content:"+";flex:none;margin-left:auto;display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--paper-2);font-family:var(--serif);font-size:1.15rem;line-height:1;color:var(--bark);transition:transform .2s,background .2s}
+details:hover summary::after{background:var(--honey-soft)}
+details[open] summary::after{content:"–";background:var(--honey)}
+details .body{padding:0 1.25rem 1.1rem}
 details .body p{margin-bottom:.6rem}
 .tag{font-weight:600;color:var(--bark)}
-.portal{margin-top:1.5rem;color:var(--muted)}
-.support{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
-.support div{border-top:2px solid var(--honey);padding-top:.8rem}
-.support .amt{font-family:var(--serif);font-size:1.8rem;display:block}
+.portal{display:flex;gap:.75rem;align-items:flex-start;margin-top:1.75rem;padding:1rem 1.25rem;border:1.5px dashed var(--rule);border-radius:12px;color:var(--muted)}
+.portal::before{content:"";flex:none;width:1.15rem;height:1.15rem;margin-top:.25rem;background:var(--bark);-webkit-mask:var(--i-info) center/contain no-repeat;mask:var(--i-info) center/contain no-repeat}
 
-/* dates */
-.timeline{list-style:none;margin:0;padding:0;max-width:720px}
-.timeline li{display:grid;grid-template-columns:10.5rem 1fr;gap:1.25rem;padding:.85rem 0;border-bottom:1px solid var(--rule);position:relative}
+/* dates: vertical timeline */
+#dates .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);column-gap:4.5rem;align-items:start}
+#dates h2{grid-column:1/-1}
+#dates .note{display:flex;gap:.7rem;align-items:flex-start;margin:2rem 0 0;padding:1.2rem 1.3rem;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--honey);border-radius:var(--radius);box-shadow:var(--shadow)}
+#dates .note::before{content:"";flex:none;width:1.1rem;height:1.1rem;margin-top:.2rem;background:var(--bark);-webkit-mask:var(--i-info) center/contain no-repeat;mask:var(--i-info) center/contain no-repeat}
+.timeline{list-style:none;margin:2rem 0 0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:.55rem;top:.6rem;bottom:.6rem;width:2px;background:linear-gradient(var(--rule),var(--honey))}
+.timeline li{display:grid;grid-template-columns:10.5rem 1fr;gap:1.25rem;padding:.85rem 1rem .85rem 2.4rem;position:relative;border-radius:10px;transition:background .15s}
+.timeline li:not(.final):not(.next):hover{background:rgba(247,248,241,.6)}
+.timeline li::before{content:"";position:absolute;left:.15rem;top:1.15rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--paper-2);border:2px solid var(--bark)}
 .timeline time{font-weight:600}
-.timeline li.next{background:linear-gradient(90deg,var(--honey-soft),transparent);margin:0 -1rem;padding-left:1rem;padding-right:1rem}
-.timeline .badge{display:inline-block;margin-left:.5rem;font-size:.8rem;font-weight:600;background:var(--ink);color:var(--paper);border-radius:999px;padding:.05rem .55rem;vertical-align:1px}
-.timeline li.final time,.timeline li.final span{font-family:var(--serif);font-weight:400;font-size:1.15rem}
+.timeline li.next{background:linear-gradient(90deg,var(--honey-soft),rgba(245,223,160,0))}
+.timeline li.next::before{background:var(--honey);border-color:var(--honey);box-shadow:0 0 0 5px rgba(227,167,47,.3)}
+.timeline .badge{display:inline-block;margin-left:.5rem;font-size:.72rem;font-weight:600;letter-spacing:.04em;background:var(--ink);color:var(--paper);border-radius:999px;padding:.08rem .55rem;vertical-align:1px}
+.timeline li.final{margin-top:.5rem;background:var(--forest);color:var(--cream);box-shadow:var(--shadow)}
+.timeline li.final::before{background:var(--honey);border-color:var(--forest);width:1.1rem;height:1.1rem;left:.05rem;box-shadow:0 0 0 3px var(--honey)}
+.timeline li.final time,.timeline li.final span{font-family:var(--serif);font-weight:400;font-size:1.2rem}
+.timeline li.final time{color:var(--honey)}
 .note{font-size:.92rem;color:var(--muted);margin-top:1rem}
 
 /* schedule */
-.sched{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-.sched h3{margin-bottom:.75rem}
-.sched td:first-child{width:4.5rem;font-variant-numeric:tabular-nums;color:var(--muted)}
-.sched tr.rt td{background:rgba(227,167,47,.18)}
-.sched tr.rt td:first-child{padding-left:.5rem}
-.sched tr.brk td{color:var(--muted);font-style:italic}
+.sched{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+.sched > div{padding:1.6rem 1.6rem 1.1rem}
+.sched h3{margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+.sched h3::before{content:"";width:.8rem;height:.8rem;border-radius:50%;background:var(--honey)}
+.sched > div:last-child h3::before{background:var(--bark)}
+.sched{--c-open:#6B4A35;--c-inv:#3F6587;--c-spot:#A63A45;--c-post:#9A6A08;--c-rt:#3E7A52;--c-brk:#A3AB9B}
+.sched table{border-collapse:separate;border-spacing:0 5px}
+.sched td{padding:.55rem .75rem;border:0;background:var(--k-bg,transparent)}
+.sched td:first-child{width:4.75rem;font-variant-numeric:tabular-nums;font-weight:600;color:var(--k,var(--muted));border-radius:8px 0 0 8px}
+.sched td:last-child{border-radius:0 8px 8px 0}
+.sched tr.open{--k:var(--c-open);--k-bg:rgba(107,74,53,.09)}
+.sched tr.inv{--k:var(--c-inv);--k-bg:rgba(63,101,135,.11)}
+.sched tr.spot{--k:var(--c-spot);--k-bg:rgba(166,58,69,.09)}
+.sched tr.post{--k:var(--c-post);--k-bg:rgba(227,167,47,.18)}
+.sched tr.rt{--k:var(--c-rt);--k-bg:rgba(62,122,82,.13)}
+.sched tr.rt td:last-child,.sched tr.post td:last-child{font-weight:600}
+.sched tr.brk{--k:var(--c-brk)}
+.sched tr.brk td{color:var(--muted);font-style:italic;background:repeating-linear-gradient(-45deg,transparent 0 6px,rgba(30,43,35,.04) 6px 12px)}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem .6rem;list-style:none;margin:1.5rem 0 0;padding:0;font-size:.88rem}
+.legend li{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .75rem .3rem .6rem;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+.legend li::before{content:"";width:.7rem;height:.7rem;border-radius:3px;background:var(--k)}
+.legend .open{--k:#6B4A35}.legend .inv{--k:#3F6587}.legend .spot{--k:#A63A45}.legend .post{--k:#C88A12}.legend .rt{--k:#3E7A52}.legend .brk{--k:#A3AB9B}
 
 /* people */
-.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2rem 2rem}
-.person{display:grid;grid-template-columns:3.5rem 1fr;gap:.9rem;align-items:start}
-.mono{width:3.5rem;height:3.5rem;border-radius:50%;background:var(--paper-2);border:2px solid var(--honey);display:grid;place-items:center;font-family:var(--serif);font-size:1.15rem;color:var(--bark);overflow:hidden}
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.person{position:relative;display:grid;grid-template-columns:5rem 1fr;gap:1.1rem;align-items:start;align-content:start;padding:1.4rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.person:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.mono{width:5rem;height:5rem;border-radius:50%;background:var(--paper-2);border:3px solid var(--card);box-shadow:0 0 0 2px var(--honey),0 10px 20px -10px rgba(30,43,35,.5);display:grid;place-items:center;font-family:var(--serif);font-size:1.15rem;color:var(--bark);overflow:hidden;transition:box-shadow .2s}
+.person:hover .mono{box-shadow:0 0 0 3px var(--honey),0 12px 24px -10px rgba(30,43,35,.55)}
 .mono img{width:100%;height:100%;object-fit:cover}
-.person h3{font-size:1.12rem;margin-bottom:.2rem}
-.person p{font-size:.93rem;color:var(--muted);margin:0}
-.speakers .person p.why{margin-top:.5rem;color:var(--ink)}
-.pc{columns:3 14rem;column-gap:2rem;list-style:none;padding:0;margin:0;font-size:.95rem}
-.pc li{padding:.2rem 0;break-inside:avoid}
+.person h3{font-size:1.2rem;margin-bottom:.25rem}
+.person h3 a{text-decoration:none}
+.person h3 a::after{content:"";position:absolute;inset:0;border-radius:var(--radius)}
+.person:hover h3 a{text-decoration:underline;text-decoration-color:var(--honey)}
+.person:focus-within{box-shadow:var(--shadow-lg),0 0 0 3px var(--honey)}
+.person h3 a:focus-visible{outline:none}
+.person p{font-size:.92rem;color:var(--muted);margin:0;text-align:inherit;hyphens:manual;-webkit-hyphens:manual;text-wrap:pretty}
+#speakers .people{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem}
+#speakers .person{flex:1 1 170px;max-width:240px;grid-template-columns:1fr;justify-items:center;text-align:center;gap:1rem;padding:2rem 1.25rem 1.6rem}
+#speakers .mono{width:7.5rem;height:7.5rem}
+#speakers .person h3{font-size:1.25rem}
+#organizers .people{grid-template-columns:repeat(4,1fr)}
+#organizers .person{grid-template-columns:1fr;justify-items:center;text-align:center;padding:1.75rem 1.25rem 1.5rem}
+#organizers .mono{width:6.25rem;height:6.25rem}
+.pc{columns:4 12rem;column-gap:32px;list-style:none;padding:26px 32px;margin:0;font-size:15px;line-height:24px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.pc li{display:flex;align-items:flex-start;gap:10px;padding:5px 0;break-inside:avoid}
+.pc li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;border-radius:1px;background:var(--honey)}
 .sub{margin-top:3.5rem}
+.sub h3{margin-bottom:1rem}
 
-footer{background:var(--forest);color:#CDD5C6;padding:3rem 0;font-size:.95rem}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem}
-footer a{color:#EEF0E4}
+/* contact */
+#contact .wrap{max-width:1140px}
+#contact a[href^=mailto]{font-weight:600}
 
+footer{position:relative;background:var(--forest);color:#CDD5C6;padding:3.25rem 0;font-size:.95rem;border-top:4px solid var(--honey)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem 3rem}
+footer p{margin:0}
+footer a{color:var(--cream)}
+.foot-brand{display:flex;align-items:flex-start;gap:1rem}
+.foot-brand svg{width:2.75rem;height:2.75rem;flex:none;margin-top:-.2rem;color:var(--cream)}
+.foot-brand strong{display:block;font:400 1.35rem/1.2 var(--serif);color:var(--cream);margin-bottom:.15rem}
+.foot-links{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem}
+
+@media (max-width:1100px){
+  .nav ul a{padding:.4rem .55rem}
+  /* three across, then two, rather than five cramped cards */
+  #speakers .person{flex-basis:250px;max-width:270px}
+}
+@media (max-width:1020px){
+  .nav .brand{font-size:0;gap:0}
+}
 @media (max-width:860px){
-  .hero .wrap,.two,.sched{grid-template-columns:1fr;gap:2rem}
+  section{padding:4.25rem 0}
+  .hero{padding:2.75rem 0 4.5rem}
+  .hero::after{height:1.75rem}
+  .hero-grid{margin-top:1.75rem}
+  .hero-grid,.two,.sched,#about .two,#dates .wrap{grid-template-columns:1fr;gap:2rem}
   .zones{grid-template-columns:1fr}
-  .zone-col,.zone-col + .zone-col{padding:1.75rem 0;border-left:0;border-bottom:1px solid var(--rule)}
-  .support{grid-template-columns:1fr}
   .timeline li{grid-template-columns:1fr;gap:.15rem}
-  .nav .brand{display:none}
-  .nav ul{margin-left:0}
+  .nav .wrap{gap:.75rem}
+  #about .wrap.two > div:last-child{padding:1.75rem 1.5rem 1rem}
+  #speakers .people,#organizers .people{gap:1rem}
+  #organizers .person{padding:1.5rem .9rem 1.3rem}
+  #organizers .person h3{font-size:1.1rem}
+  #organizers .mono{width:5.25rem;height:5.25rem}
+  .curve-fig{padding:1rem 1rem .9rem}
+  .readout,.curve-fig figcaption{white-space:normal}
+  .readout{min-height:3.4rem}
+  .statement{padding:1.75rem 1.5rem 1.5rem}
+  .statement::before{font-size:5.5rem;right:1rem;top:.6rem}
+  details .body{padding-left:1.25rem}
+}
+@media (max-width:700px){
+  #organizers .people{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  p{text-align:left;hyphens:manual;-webkit-hyphens:manual;text-wrap:pretty}
+  #speakers .person{flex-basis:140px;padding:1.5rem .9rem 1.3rem}
+  #speakers .mono{width:5.75rem;height:5.75rem}
+  #speakers .person h3{font-size:1.1rem}
+  #organizers .person{padding:1.4rem .7rem 1.25rem}
+  /* committee as name chips rather than a long single column */
+  .pc{columns:2;column-gap:20px;padding:18px 20px;font-size:14px;line-height:22px}
+  .pc li::before{margin-top:8px}
+}
+@media print{
+  .nav{position:static}
+  .hero::after{display:none}
+  *{animation:none!important}
 }
 </style>
 </head>
@@ -165,10 +341,10 @@ footer a{color:#EEF0E4}
 
 <nav class="nav" aria-label="Sections">
   <div class="wrap">
-    <a class="brand" href="#top">Goldilocks @ ICLR 2027</a>
+    <a class="brand" href="#top"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 36 C20 36 23 9 32 9 C41 9 44 36 58 36 Z" fill="#E3A72F"/><path d="M5 36 H59 C59 48.5 47.5 56 32 56 C16.5 56 5 48.5 5 36 Z" fill="currentColor"/><rect x="23" y="57.5" width="18" height="3.5" rx="1.75" fill="currentColor"/></svg>Goldilocks @ ICLR 2027</a>
     <ul>
-      <li><a href="#zones">Zones</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#zones">Overview</a></li>
+      <li><a href="#about">Motivation</a></li>
       <li><a href="#cfp">Call for papers</a></li>
       <li><a href="#dates">Dates</a></li>
       <li><a href="#schedule">Schedule</a></li>
@@ -181,27 +357,27 @@ footer a{color:#EEF0E4}
 
 <header class="hero" id="top">
   <div class="wrap">
-    <div>
-      <h1>Goldilocks’ Workshop on Finding “Just Right” in Agentic AI</h1>
-      <p class="lede">Model scale, data, training, inference budgets and agent harnesses interact. Some combinations land in a sweet spot and work surprisingly well. This workshop is about finding those spots, understanding them, and optimizing for them.</p>
-      <p class="when">ICLR 2027, San Francisco. Full day, in person, on 29 or 30 April 2027.</p>
-      <div class="btns">
-        <a class="btn btn-gold" href="#cfp">Read the call for papers</a>
-        <a class="btn btn-line" href="#dates">See key dates</a>
+    <!-- <img class="hero-logo" src="logo/goldilocks-lockup-on-dark.png" width="1000" height="280" alt="Goldilocks Workshop, ICLR 2027"> -->
+    <p class="eyebrow"><span>ICLR 2027</span> Workshop proposal</p>
+    <h1><span class="pre">Goldilocks’ Workshop on</span> Finding <em>“Just Right”</em> in AI</h1>
+    <div class="hero-grid">
+      <div>
+        <p class="lede">Agentic AI systems combine models, reasoning procedures, tools, memory, retrieval and human input. Their performance often peaks at configurations that are neither too little nor too much, but just right. This workshop studies how to identify, understand and optimize for these Goldilocks zones.</p>
+        <p class="when">Proposed full-day, in-person workshop at ICLR 2027, San&nbsp;Francisco, 29 or 30 April 2027.</p>
+        <div class="btns">
+          <a class="btn btn-gold" href="#cfp">Call for papers</a>
+          <a class="btn btn-line" href="#dates">Important dates</a>
+        </div>
       </div>
-    </div>
 
-    <figure class="curve-fig">
-      <svg id="curve" viewBox="0 0 600 300" role="img" aria-labelledby="curve-title">
-        <title id="curve-title">An inverted-U performance curve: performance rises with investment, peaks in a shaded just-right zone, then falls.</title>
-      </svg>
-      <div class="slider-row">
-        <label for="invest">How much?</label>
-        <input id="invest" type="range" min="0" max="100" value="8" aria-describedby="readout">
-      </div>
-      <p class="readout" id="readout" aria-live="polite"></p>
-      <figcaption>Slide to add more of anything: reasoning tokens, training steps, human input.</figcaption>
-    </figure>
+      <figure class="curve-fig">
+        <svg id="curve" viewBox="0 0 600 300" role="img" aria-labelledby="curve-title">
+          <title id="curve-title">An inverted-U performance curve: performance rises with investment, peaks in a shaded just-right zone, then falls.</title>
+        </svg>
+        <p class="readout" id="readout"></p>
+        <figcaption>Investment: reasoning tokens, training steps, human input.</figcaption>
+      </figure>
+    </div>
   </div>
 </header>
 
@@ -209,70 +385,79 @@ footer a{color:#EEF0E4}
 
 <section id="zones">
   <div class="wrap">
-    <h2>Three bears, three zones</h2>
-    <p class="prose">A Goldilocks zone shows up in three recurring ways. Each one asks a different question about the same system.</p>
+    <h2>Goldilocks zones</h2>
+    <p>We use the term <em>Goldilocks zones</em>, after the story of Goldilocks and the Three Bears, for sweet spots in agentic AI systems where a combination of configurations (model scale, training data, hyperparameters, training procedures, agent harnesses and so on) is just right and gives unexpectedly strong performance. They arise in three ways.</p>
 
     <div class="zones">
       <article class="zone-col">
         <svg viewBox="0 0 120 80" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M44 30c-5-6 5-9 0-16M60 30c-5-6 5-9 0-16M76 30c-5-6 5-9 0-16" stroke="var(--hot)"/>
-          <path d="M18 40H102A42 28 0 0 1 18 40Z" fill="var(--honey-soft)"/>
-          <path d="M50 70H70"/>
+          <rect x="47" y="12" width="26" height="58" rx="3" fill="var(--honey-soft)" stroke="none"/>
+          <path d="M14 10V70H106"/>
+          <path d="M18 66C30 42 41 26 60 24"/>
+          <path d="M60 24C77 23 88 32 102 46" stroke="var(--hot)" stroke-dasharray="0.1 5.5"/>
+          <circle cx="60" cy="24" r="4" fill="var(--honey)" stroke="none"/>
         </svg>
         <h3>Saturation</h3>
-        <p class="story">Papa Bear’s porridge: hotter is not always better.</p>
-        <p>Spending more on reasoning, training or human intervention eventually stops paying off, and can start to hurt. The zone is the budget that balances performance against cost.</p>
-        <p class="eg">Extra inference-time compute that no longer improves agentic reasoning.</p>
+        <p class="story">More is not always better.</p>
+        <p>Increasing resource investment, such as in reasoning, training or human intervention, eventually yields diminishing gains or even degrades performance beyond a certain point.</p>
+        <p class="eg">In agentic reasoning, extra inference-time compute brings diminishing gains at rising cost. The Goldilocks zone is a reasoning budget that balances task performance against inference cost.</p>
       </article>
 
       <article class="zone-col">
         <svg viewBox="0 0 120 80" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 48H30V53H6Z" fill="var(--honey-soft)"/>
-          <path d="M6 12V72M30 53V72"/>
-          <path d="M40 56H60V60H40Z" fill="var(--honey-soft)"/>
-          <path d="M40 30V72M60 60V72"/>
-          <path d="M70 63H84V66H70Z" fill="var(--honey-soft)"/>
-          <path d="M70 46V72M84 66V72"/>
-          <circle cx="100" cy="66" r="5.5" fill="var(--honey-soft)"/>
-          <circle cx="112" cy="66" r="5.5" fill="var(--honey-soft)"/>
-          <circle cx="106" cy="56.5" r="5.5" fill="var(--honey-soft)"/>
-          <path d="M2 72H118"/>
+          <path d="M14 13H76V25H14Z"/>
+          <path d="M22 13V25M30 13V25"/>
+          <path d="M14 34H76V46H14Z" fill="var(--honey-soft)"/>
+          <path d="M36 34V46M57 34V46"/>
+          <path d="M14 55H76V67H14Z"/>
+          <path d="M56 55V67M68 55V67"/>
+          <path d="M84 6V74" stroke-dasharray="0.1 5"/>
+          <path d="M92 19H96M92 40H104M92 61H94" stroke-width="6"/>
+          <circle cx="104" cy="40" r="4" fill="var(--honey)" stroke="none"/>
         </svg>
         <h3>Allocation</h3>
-        <p class="story">Mama Bear’s chair: how tall can it be and still leave enough wood for Papa and Baby?</p>
-        <p>A fixed budget of tokens, GPUs, annotations or human effort has to be divided across sub-agents or stages. The zone is the split that gets near-optimal results.</p>
-        <p class="eg">Dividing an annotation budget between supervised fine-tuning and RL in post-training.</p>
+        <p class="story">A fixed budget, optimally split.</p>
+        <p>Limited resources, such as reasoning tokens and inference GPUs, must be optimally distributed across multiple sub-agents, training stages or system components under a fixed budget.</p>
+        <p class="eg">In post-training agentic models, a fixed annotation budget is divided between supervised fine-tuning and reinforcement learning. The Goldilocks zone is the split that gives near-optimal downstream performance.</p>
       </article>
 
       <article class="zone-col">
         <svg viewBox="0 0 120 80" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 70V24M110 70V44"/>
-          <path d="M10 50H110V60H10Z"/>
-          <ellipse cx="26" cy="44" rx="11" ry="5.5" fill="var(--paper-2)"/>
-          <path d="M42 50V42Q76 34 110 42V50" fill="var(--honey-soft)"/>
+          <path d="M14 10V70H106"/>
+          <path d="M22 70V52H36V70"/>
+          <path d="M44 59V65M41 62H47"/>
+          <path d="M55 70V48H69V70"/>
+          <path d="M77 59H83M77 65H83"/>
+          <path d="M90 70V14H104V70Z" fill="var(--honey-soft)"/>
+          <path d="M90 14H104V30H90Z" fill="var(--honey)" stroke="none"/>
+          <path d="M90 14H104V70H90Z"/>
+          <path d="M86 30H106" stroke="var(--hot)" stroke-dasharray="0.1 4.5"/>
         </svg>
         <h3>Synergy</h3>
-        <p class="story">Baby Bear’s bed: mattress, pillow and quilt only work together.</p>
-        <p>Models, harnesses and tools combine so that the whole beats any part on its own. The zone is the configuration that makes the most of their complementary strengths.</p>
-        <p class="eg">Autonomous research agents paired with structured Bayesian optimization.</p>
+        <p class="story">The whole exceeds its parts.</p>
+        <p>Interactions among the components of an agentic system, such as models, agent harnesses and tools, produce gains beyond what any single component can achieve on its own.</p>
+        <p class="eg">In agentic autoresearch, the flexible exploration of autonomous agents complements the structure and reliability of traditional search methods. The Goldilocks zone is the set of configurations that makes the most of this.</p>
       </article>
     </div>
   </div>
 </section>
 
 <section id="about">
-  <div class="wrap two">
-    <div class="prose">
-      <h2>Why a workshop on this, now</h2>
-      <p>Agentic systems now combine models, reasoning procedures, tools, memory, retrieval, human input, and training and inference pipelines. As the number of interacting parts grows, good configurations get harder to find, and what works in one system often fails to transfer to another.</p>
-      <p>Findings about saturation, allocation and synergy are scattered across papers as isolated ablations and heuristics. Papers report the best setting, but rarely the shape of the optimum, why it exists, where its edges are, or whether it carries over. That makes recurring patterns hard to see.</p>
-      <p>This workshop brings these observations together, and pairs researchers who see Goldilocks zones empirically with those building theory and optimization methods to explain and navigate them.</p>
-    </div>
-    <div class="prose">
-      <h3>What comes out of it</h3>
-      <p>Contributed papers, invited talks and two roundtables feed into a public <strong>Goldilocks Research Agenda</strong>: a lasting reference on the mechanisms behind saturation, allocation and synergy, and on how to find and optimize for these zones.</p>
-      <h3 style="margin-top:1.75rem">Two roundtables</h3>
-      <p><strong>Finding Goldilocks problems</strong> looks at recurring phenomena, their causes and open questions. <strong>Finding Goldilocks solutions</strong> looks at methods to explain, locate, navigate or widen these zones. Each starts with 4 to 6 invited authors, and everyone is welcome to join.</p>
+  <div class="wrap">
+    <div>
+      <h2>Motivation</h2>
+      <p>Agentic AI research is moving towards systems that combine models, reasoning procedures, tools, memory, retrieval, agents, human input, and training and inference pipelines. As the number of interacting components grows, effective configurations become harder to find, and findings from one system may not carry over to another.</p>
+      <p>Research on saturation, allocation and synergy currently appears as isolated ablations or heuristics. Papers often report the best configuration without describing the performance landscape around it, the mechanisms behind the optimum, the conditions under which it holds, or whether it transfers. This makes it hard to recognize recurring patterns and to develop general principles and methods.</p>
+      <p>The workshop brings together researchers who observe Goldilocks zones empirically and those who develop theory and optimization methods to explain and navigate them.</p>
+      <h3 style="margin-top:1.75rem">Aims</h3>
+      <p>The workshop aims to advance three open problems:</p>
+      <ol>
+        <li><strong>Characterization:</strong> understanding where and why saturation, allocation trade-offs and synergy arise, rather than reporting a single best configuration.</li>
+        <li><strong>Transfer:</strong> determining whether these zones carry over across tasks, model scales and systems.</li>
+        <li><strong>Navigation:</strong> developing sample-efficient methods, including agents, that locate, track or shift these zones under limited budgets.</li>
+      </ol>
+      <h3 style="margin-top:1.75rem">Workshop outcomes</h3>
+      <p>The workshop will produce a public <strong>Goldilocks Research Agenda</strong> that draws on the accepted papers, invited talks, and roundtable discussions. It will set out recurring mechanisms behind saturation, allocation and synergy, promising research directions, and guidance on how to identify, understand, navigate and optimize for Goldilocks zones in agentic settings.</p>
     </div>
   </div>
 </section>
@@ -281,33 +466,42 @@ footer a{color:#EEF0E4}
   <div class="wrap">
     <h2>Call for papers</h2>
     <div class="two">
-      <div class="prose">
-        <p>We welcome both <strong>Goldilocks problems in agents</strong> and <strong>agents for solving Goldilocks problems</strong> across AI research. That includes empirical problems in models and pipelines that aren’t agentic themselves, and theoretical problems, for example in game theory or in combining classical optimization with agentic workflows.</p>
-        <p>When you submit, choose one of two categories: <strong>Empirical</strong> (identifying and characterizing Goldilocks phenomena) or <strong>Optimization &amp; Theory</strong> (explaining and navigating Goldilocks zones). Empirical posters present in the morning, Optimization &amp; Theory in the afternoon, so you can visit the other session.</p>
-        <p>Reviews focus on clarity, rigor and novelty. For empirical work, we especially value papers that characterize the structure around a zone, not just report a best configuration. The workshop is non-archival; accepted papers stay on the website and OpenReview.</p>
+      <div>
+        <p>The workshop brings together empirical and theoretical researchers who work on agents, optimization and beyond. Our goal is to identify where and why Goldilocks problems arise, and to develop methods for finding and optimizing Goldilocks zones.</p>
+        <p>We welcome both <strong>Goldilocks problems in agents</strong> and <strong>agents for solving Goldilocks problems</strong> across AI research. That includes empirical problems in models and pipelines that are not themselves agentic, and theoretical problems, for example in game theory or in combining classical optimization with agentic workflows. Categories may overlap, and submissions may address empirical questions, theoretical questions, or both.</p>
+        <p>Main Track and Tiny Papers Track submissions declare one of two categories: <strong>Empirical</strong> (identifying and characterizing Goldilocks phenomena) or <strong>Optimization &amp; Theory</strong> (explaining and navigating Goldilocks zones). Empirical papers appear in the morning poster session and Optimization &amp; Theory papers in the afternoon (exceptions on request), so authors can visit the other session.</p>
+        <p>Both tracks are for novel or ongoing work. Papers published at archival venues, including the ICLR 2027 main conference, will not be considered. Submissions use the ICLR 2027 template and receive at least two double-blind reviews on OpenReview. Papers are evaluated on clarity, scientific rigor and novelty and, for empirical work, on how well they characterize the structure around a Goldilocks zone rather than only reporting a best configuration. Reviewers will nominate papers for spotlight talks.</p>
+        <p>All submissions must comply with the ICLR 2027 AI Policy for Authors. AI assistance is permitted, but short and tiny papers must be written primarily by humans.</p>
+        <p>The workshop is non-archival, but accepted Main, Tiny and Collaboration Track papers will be hosted publicly on both the workshop website and on OpenReview.</p>
       </div>
       <div>
         <table>
-          <thead><tr><th>Track</th><th>Length</th><th>Opens</th></tr></thead>
+          <thead><tr><th>Track</th><th>Length</th></tr></thead>
           <tbody>
-            <tr><td>Main, full paper</td><td>Up to 8 pages</td><td>1 Dec 2026</td></tr>
-            <tr><td>Main, short paper</td><td>Up to 4 pages</td><td>1 Dec 2026</td></tr>
-            <tr><td>Tiny papers</td><td>Up to 2 pages</td><td>1 Dec 2026</td></tr>
-            <tr><td>Collaboration</td><td>Up to 2 pages</td><td>1 Apr 2027</td></tr>
+            <tr><td>Main, full paper</td><td>Up to 8 pages</td></tr>
+            <tr><td>Main, short paper</td><td>Up to 4 pages</td></tr>
+            <tr><td>Tiny papers</td><td>Up to 2 pages</td></tr>
+            <tr><td>Collaboration</td><td>Up to 2 pages</td></tr>
           </tbody>
         </table>
-        <p class="note">Page limits exclude references and appendices. Collaboration Track papers build on an accepted workshop paper, with at least one original author and one new collaborator. Early-stage ideas without experiments are welcome.</p>
+        <p class="note">See <a href="#dates">important dates</a> for deadlines. Page limits exclude references and appendices. Tiny papers present late-breaking or less-than-full-length work, such as a simple unpublished idea, a modest self-contained theoretical result, a follow-up experiment or re-analysis, or a fresh perspective on published work.</p>
+        <p class="note">Each Collaboration Track paper builds on an accepted Main or Tiny Papers paper and includes at least one original author and at least one new collaborator, so attendees who did not submit can develop ideas with workshop authors. Early-stage ideas without experiments are welcome. These papers are not peer-reviewed; organizers judge them for relevance to the workshop.</p>
+        <p class="note"><strong>Awards and support.</strong> We have secured US$1,000 for best paper awards in the Main and Tiny Papers tracks and US$500 for incentive awards in the Collaboration Track. We have also secured US$3,000 in travel grants for attendees who need support, including young researchers, and US$1,000 for refreshments at the breaks after the roundtables.</p>
+        <p class="note"><strong>Virtual access.</strong> Remote presentations are permitted only in exceptional circumstances. If you cannot travel, for example because of visa issues, the organizers will display your poster. Talks will be recorded and, with consent, shared after the workshop.</p>
       </div>
     </div>
 
     <div class="statement">
-      <h3>Begin with a Goldilocks statement</h3>
-      <p class="prose" style="margin:0">Every submission opens with one sentence naming what is being varied, what goes wrong with too little and too much of it, and the middle ground the paper studies.</p>
-      <blockquote>“Too little <span class="ph">[X]</span> leads to <span class="ph">[outcome A]</span>, whereas too much <span class="ph">[X]</span> leads to <span class="ph">[outcome B]</span>; this paper investigates how to identify or achieve an intermediate level that <span class="ph">[desired outcome]</span>.”</blockquote>
+      <h3>Goldilocks statement</h3>
+      <p style="margin:0">Please include a one-sentence Goldilocks statement in the abstract or introduction that explains how the paper relates to the topics below. An existing sentence can serve this purpose. For example:</p>
+      <blockquote>“This paper investigates <span class="ph">[problem or method]</span> in <span class="ph">[setting]</span>, with a focus on <span class="ph">[saturation, allocation, or synergy]</span>.”</blockquote>
+      <blockquote>“This paper uses agents to investigate or solve <span class="ph">[empirical or theoretical problem]</span> involving <span class="ph">[saturation, allocation, synergy, or a related topic]</span>.”</blockquote>
+      <p style="margin:.8rem 0 0">These examples are illustrative, and any wording that clearly explains the connection is fine.</p>
     </div>
 
     <div class="topics">
-      <h3>Topics include, but are not limited to</h3>
+      <h3>Topics</h3>
+      <p>Topics include, but are not limited to, the following.</p>
       <details>
         <summary>Saturation in agents</summary>
         <div class="body">
@@ -351,49 +545,46 @@ footer a{color:#EEF0E4}
       </details>
     </div>
 
-    <!-- TODO: replace with your OpenReview link once the venue is created -->
-    <p class="portal">Submissions will open on OpenReview on 1 December 2026. Use the ICLR 2027 author kit.</p>
+    <p class="portal">If the workshop is accepted, submissions will open on OpenReview on 1 December 2026, using the ICLR 2027 author kit.</p>
 
-    <div class="support">
-      <div><span class="amt">US$1,000</span>Best paper awards, Main and Tiny Papers tracks</div>
-      <div><span class="amt">US$500</span>Best paper awards, Collaboration Track</div>
-      <div><span class="amt">US$3,000</span>Travel grants for attendees who need support, with priority for early-career researchers</div>
-    </div>
   </div>
 </section>
 
 <section id="dates">
   <div class="wrap">
-    <h2>Key dates</h2>
+    <h2>Important dates</h2>
     <ol class="timeline">
       <li data-date="2026-12-01"><time datetime="2026-12-01">1 Dec 2026</time><span>Call for papers, Main and Tiny Papers tracks</span></li>
       <li data-date="2027-02-01"><time datetime="2027-02-01">1 Feb 2027</time><span>Submission deadline, Main and Tiny Papers tracks</span></li>
-      <li data-date="2027-02-26"><time datetime="2027-02-26">26 Feb 2027</time><span>Decisions and reviews released, accepted papers public on OpenReview</span></li>
-      <li data-date="2027-04-01"><time datetime="2027-04-01">1 Apr 2027</time><span>Camera-ready papers and posters due, full program posted, Collaboration Track opens</span></li>
-      <li data-date="2027-04-28"><time datetime="2027-04-28">28 Apr 2027</time><span>Collaboration Track deadline</span></li>
-      <li data-date="2027-04-29"><time datetime="2027-04-29">29 Apr 2027</time><span>Collaboration Track decisions</span></li>
+      <li data-date="2027-02-26"><time datetime="2027-02-26">26 Feb 2027</time><span>Final decisions and reviews released, accepted papers public on OpenReview</span></li>
+      <li data-date="2027-04-01"><time datetime="2027-04-01">1 Apr 2027</time><span>Camera-ready papers due; Collaboration Track call opens</span></li>
+      <li data-date="2027-04-27"><time datetime="2027-04-27">27 Apr 2027</time><span>Collaboration Track deadline</span></li>
+      <li data-date="2027-04-28"><time datetime="2027-04-28">28 Apr 2027</time><span>Collaboration Track final decisions</span></li>
       <li data-date="2027-04-30" class="final"><time datetime="2027-04-29">29 or 30 Apr 2027</time><span>Workshop day in San Francisco</span></li>
     </ol>
-    <p class="note">All deadlines are Anywhere on Earth (AoE). The workshop day will be set by ICLR.</p>
+    <p class="note">All deadlines are 11:59 pm Anywhere on Earth (AoE). The workshop day will be set by ICLR. All dates are tentative and depend on the proposal being accepted.</p>
   </div>
 </section>
 
 <section id="schedule">
   <div class="wrap">
-    <h2>Tentative program</h2>
-    <p class="prose">Times are Pacific Daylight Time. Invited talks are 20 minutes and spotlights 10 minutes, each followed by 5 minutes of questions.</p>
+    <h2>Tentative schedule</h2>
+    <p>Times are Pacific Daylight Time. Five invited talks of 20 minutes and four spotlight talks of 10 minutes, each followed by 5 minutes of questions.</p>
+    <ul class="legend" aria-label="Session types">
+      <li class="inv">Invited talk</li><li class="spot">Spotlight talk</li><li class="post">Poster session</li><li class="rt">Roundtable</li><li class="open">Opening, awards and closing</li><li class="brk">Break</li>
+    </ul>
     <div class="sched">
       <div>
         <h3>Morning</h3>
         <table>
           <tbody>
-            <tr><td>08:15</td><td>Opening remarks</td></tr>
-            <tr><td>08:30</td><td>Invited talk 1</td></tr>
-            <tr><td>08:55</td><td>Invited talk 2</td></tr>
+            <tr class="open"><td>08:15</td><td>Opening remarks</td></tr>
+            <tr class="inv"><td>08:30</td><td>Invited talk 1</td></tr>
+            <tr class="inv"><td>08:55</td><td>Invited talk 2</td></tr>
             <tr class="brk"><td>09:20</td><td>Coffee break</td></tr>
-            <tr><td>09:40</td><td>Spotlight talk 1</td></tr>
-            <tr><td>09:55</td><td>Spotlight talk 2</td></tr>
-            <tr><td>10:10</td><td>Poster session 1: Empirical</td></tr>
+            <tr class="spot"><td>09:40</td><td>Spotlight talk 1</td></tr>
+            <tr class="spot"><td>09:55</td><td>Spotlight talk 2</td></tr>
+            <tr class="post"><td>10:10</td><td>Poster session 1: Empirical</td></tr>
             <tr class="rt"><td>11:10</td><td>Roundtable 1: Finding Goldilocks problems</td></tr>
             <tr class="brk"><td>12:30</td><td>Lunch</td></tr>
           </tbody>
@@ -403,15 +594,15 @@ footer a{color:#EEF0E4}
         <h3>Afternoon</h3>
         <table>
           <tbody>
-            <tr><td>13:30</td><td>Spotlight talk 3</td></tr>
-            <tr><td>13:45</td><td>Spotlight talk 4</td></tr>
-            <tr><td>14:00</td><td>Poster session 2: Optimization &amp; Theory</td></tr>
+            <tr class="spot"><td>13:30</td><td>Spotlight talk 3</td></tr>
+            <tr class="spot"><td>13:45</td><td>Spotlight talk 4</td></tr>
+            <tr class="post"><td>14:00</td><td>Poster session 2: Optimization &amp; Theory</td></tr>
             <tr class="rt"><td>15:15</td><td>Roundtable 2: Finding Goldilocks solutions</td></tr>
             <tr class="brk"><td>16:30</td><td>Coffee break</td></tr>
-            <tr><td>16:50</td><td>Invited talk 3</td></tr>
-            <tr><td>17:15</td><td>Invited talk 4</td></tr>
-            <tr><td>17:40</td><td>Best paper prizes</td></tr>
-            <tr><td>17:50</td><td>Closing remarks</td></tr>
+            <tr class="inv"><td>16:50</td><td>Invited talk 3</td></tr>
+            <tr class="inv"><td>17:15</td><td>Invited talk 4</td></tr>
+            <tr class="inv"><td>17:40</td><td>Invited talk 5</td></tr>
+            <tr class="open"><td>18:05</td><td>Best paper and incentive awards, closing remarks</td></tr>
           </tbody>
         </table>
       </div>
@@ -422,27 +613,26 @@ footer a{color:#EEF0E4}
 <section id="speakers" class="speakers">
   <div class="wrap">
     <h2>Invited speakers</h2>
-    <!-- To use a photo, replace the initials inside .mono with <img src="img/name.jpg" alt=""> -->
     <div class="people">
-      <div class="person"><div class="mono">MT</div><div>
-        <h3>Milind Tambe</h3>
+      <div class="person"><div class="mono"><img src="photos/tambe.jpg" alt=""></div><div>
+        <h3><a href="https://teamcore.seas.harvard.edu/tambe">Milind Tambe</a></h3>
         <p>Harvard University and Google DeepMind</p>
-        <p class="why">Decision-focused learning and multi-agent systems: when better predictions stop improving decisions, and how to divide limited resources.</p>
       </div></div>
-      <div class="person"><div class="mono">MV</div><div>
-        <h3>Manuela Veloso</h3>
+      <div class="person"><div class="mono"><img src="photos/veloso.jpg" alt=""></div><div>
+        <h3><a href="https://www.cs.cmu.edu/~mmv/">Manuela Veloso</a></h3>
         <p>Carnegie Mellon University</p>
-        <p class="why">Autonomous and multi-agent systems: continual learning, planning and coordination.</p>
       </div></div>
-      <div class="person"><div class="mono">MB</div><div>
-        <h3>Max Balandat</h3>
+      <div class="person"><div class="mono"><img src="photos/leyton-brown.jpg" alt=""></div><div>
+        <h3><a href="https://www.cs.ubc.ca/~kevinlb/">Kevin Leyton-Brown</a></h3>
+        <p>University of British Columbia</p>
+      </div></div>
+      <div class="person"><div class="mono"><img src="photos/balandat.jpg" alt=""></div><div>
+        <h3><a href="https://scholar.google.com/citations?user=N0iLicUAAAAJ">Maximilian Balandat</a></h3>
         <p>Atomic Machines</p>
-        <p class="why">Bayesian optimization (BoTorch, Ax) and its synergy with language models.</p>
       </div></div>
-      <div class="person"><div class="mono">AB</div><div>
-        <h3>Antoine Bosselut</h3>
+      <div class="person"><div class="mono"><img src="photos/bosselut.jpg" alt=""></div><div>
+        <h3><a href="https://atcbosselut.github.io/">Antoine Bosselut</a></h3>
         <p>EPFL</p>
-        <p class="why">How representations evolve during LLM pretraining, and allocating pretraining resources across languages.</p>
       </div></div>
     </div>
   </div>
@@ -452,14 +642,14 @@ footer a{color:#EEF0E4}
   <div class="wrap">
     <h2>Organizers</h2>
     <div class="people">
-      <div class="person"><div class="mono">BL</div><div><h3>Bryan Kian Hsiang Low</h3><p>National University of Singapore</p></div></div>
-      <div class="person"><div class="mono">TY</div><div><h3>Teresa Yeo</h3><p>Google DeepMind</p></div></div>
-      <div class="person"><div class="mono">ZD</div><div><h3>Zhongxiang Dai</h3><p>CUHK-Shenzhen</p></div></div>
-      <div class="person"><div class="mono">CL</div><div><h3>Chun Kai Ling</h3><p>National University of Singapore</p></div></div>
-      <div class="person"><div class="mono">DC</div><div><h3>Davin Choo</h3><p>Harvard SEAS</p></div></div>
-      <div class="person"><div class="mono">AV</div><div><h3>Arun Verma</h3><p>Singapore-MIT Alliance for Research and Technology</p></div></div>
-      <div class="person"><div class="mono">LN</div><div><h3>Lynnette Ng</h3><p>DSTA</p></div></div>
-      <div class="person"><div class="mono">ZK</div><div><h3>Zi-Yu Khoo</h3><p>National University of Singapore and AI Singapore</p></div></div>
+      <div class="person"><div class="mono"><img src="photos/low.png" alt=""></div><div><h3><a href="https://www.comp.nus.edu.sg/~lowkh/">Bryan Low Kian Hsiang</a></h3><p>National University of Singapore</p></div></div>
+      <div class="person"><div class="mono"><img src="photos/yeo.jpeg" alt=""></div><div><h3><a href="https://aserety.github.io/">Teresa Yeo</a></h3><p>Google DeepMind</p></div></div>
+      <div class="person"><div class="mono"><img src="photos/dai.jpeg" alt=""></div><div><h3><a href="https://daizhongxiang.github.io/">Zhongxiang Dai</a></h3><p>CUHK-Shenzhen</p></div></div>
+      <div class="person"><div class="mono"><img src="photos/ling.jpg" alt=""></div><div><h3><a href="https://lingchunkai.github.io/">Chun Kai Ling</a></h3><p>National University of Singapore</p></div></div>
+      <div class="person"><div class="mono"><img src="photos/choo.jpg" alt=""></div><div><h3><a href="https://davinchoo.com/">Davin Choo</a></h3><p>Harvard University</p></div></div>
+      <div class="person"><div class="mono"><img src="photos/verma.png" alt=""></div><div><h3><a href="https://arunv3rma.github.io/">Arun Verma</a></h3><p>Singapore-MIT Alliance for Research and Technology Centre</p></div></div>
+      <div class="person"><div class="mono"><img src="photos/ng.jpg" alt=""></div><div><h3><a href="https://quarbby.github.io/">Lynnette Ng</a></h3><p>Defence Science and Technology Agency</p></div></div>
+      <div class="person"><div class="mono"><img src="photos/khoo.jpg" alt=""></div><div><h3><a href="https://zykhoo.github.io/">Khoo Zi-Yu</a></h3><p>National University of Singapore and AI Singapore</p></div></div>
     </div>
 
     <div class="sub">
@@ -472,18 +662,19 @@ footer a{color:#EEF0E4}
         <li>Nhung Bui</li><li>Cong Duc Hoang</li><li>Hieu Dao</li><li>Kieu Thao Nguyen Pham</li>
         <li>Zijian Zhou</li><li>Gregory Kang Ruey Lau</li><li>Zhuanghua Liu</li><li>Jingtan Wang</li>
         <li>Apivich Hemachandra</li><li>Xinyuan Niu</li><li>Jiangwei Chen</li><li>Xinyang Lu</li>
-        <li>Wenyang Hu</li><li>Manh Cuong Dao</li><li>Rui Qiao</li>
+        <li>Wenyang Hu</li><li>Manh Cuong Dao</li><li>Rui Qiao</li><li>Jie Mao</li>
+        <li>Zhiwei Shang</li><li>Zikun Qu</li><li>Mingze Kong</li><li>Jiahang Sun</li>
+        <li>Pingchen Lu</li><li>Wangxuan Fan</li><li>Xiang Li</li><li>Zhi Hong</li>
+        <li>Xiangyi Wang</li><li>Van-Anh Nguyen</li>
       </ul>
     </div>
   </div>
 </section>
 
 <section id="contact">
-  <div class="wrap prose">
+  <div class="wrap">
     <h2>Contact</h2>
-    <!-- TODO: replace with your real address -->
-    <p>Questions about submissions, reviewing or attending? Email the organizers at <a href="mailto:goldilocks.workshop@example.com">goldilocks.workshop@example.com</a>.</p>
-    <p>Recordings of talks will be shared after the workshop with speakers’ consent. Remote presentation is possible in exceptional circumstances.</p>
+    <p>For questions about submissions, reviewing or attendance, please contact any of the <a href="#organizers">organizers</a> through their homepages.</p>
   </div>
 </section>
 
@@ -491,8 +682,14 @@ footer a{color:#EEF0E4}
 
 <footer>
   <div class="wrap">
-    <p>Goldilocks’ Workshop on Finding “Just Right” in Agentic AI, ICLR 2027.</p>
-    <p><a href="https://iclr.cc">ICLR conference site</a></p>
+    <div class="foot-brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 36 C20 36 23 9 32 9 C41 9 44 36 58 36 Z" fill="#E3A72F"/><path d="M5 36 H59 C59 48.5 47.5 56 32 56 C16.5 56 5 48.5 5 36 Z" fill="currentColor"/><rect x="23" y="57.5" width="18" height="3.5" rx="1.75" fill="currentColor"/></svg>
+      <div>
+        <strong>Goldilocks</strong>
+        <p>Goldilocks’ Workshop on Finding “Just Right” in AI: a workshop proposal for ICLR 2027.</p>
+      </div>
+    </div>
+    <p class="foot-links"><a href="#top">Back to top</a> <a href="https://iclr.cc" target="_blank">ICLR conference site</a></p>
   </div>
 </footer>
 
@@ -500,13 +697,15 @@ footer a{color:#EEF0E4}
 (function(){
   /* ---------- hero curve ---------- */
   var svg = document.getElementById('curve');
+  var fig = svg.parentNode;
   var NS = 'http://www.w3.org/2000/svg';
-  var W = 600, H = 300, P = {l:40, r:20, t:30, b:40};
+  var W = 600, H = 300, P = {l:40, r:24, t:34, b:40};
   var k = 0.45, THRESH = 0.97;
   function f(x){ var t = x / k; return t * Math.exp(1 - t); }
   function sx(x){ return P.l + x * (W - P.l - P.r); }
   function sy(y){ return H - P.b - y * (H - P.t - P.b) * 0.92; }
-  function el(name, attrs){ var e = document.createElementNS(NS, name); for (var a in attrs) e.setAttribute(a, attrs[a]); svg.appendChild(e); return e; }
+  function el(name, attrs, parent){ var e = document.createElementNS(NS, name); for (var a in attrs) e.setAttribute(a, attrs[a]); (parent || svg).appendChild(e); return e; }
+  function label(cls, x, y, text, anchor){ var t = el('text', {class:cls, x:x, y:y, 'text-anchor':anchor || 'middle'}); t.textContent = text; return t; }
 
   var lo = null, hi = null, pts = [], gold = [];
   for (var i = 0; i <= 200; i++){
@@ -514,57 +713,81 @@ footer a{color:#EEF0E4}
     pts.push(sx(x).toFixed(1) + ',' + sy(y).toFixed(1));
     if (y >= THRESH){ if (lo === null) lo = x; hi = x; gold.push(sx(x).toFixed(1) + ',' + sy(y).toFixed(1)); }
   }
-  el('rect', {class:'zone', x:sx(lo), y:P.t - 10, width:sx(hi) - sx(lo), height:H - P.b - P.t + 10});
-  var zl = el('text', {class:'zone-label', x:(sx(lo) + sx(hi)) / 2, y:P.t + 2, 'text-anchor':'middle'}); zl.textContent = 'just right';
-  el('line', {class:'axis', x1:P.l, y1:H - P.b, x2:W - P.r, y2:H - P.b});
-  el('line', {class:'axis', x1:P.l, y1:P.t - 10, x2:P.l, y2:H - P.b});
-  var xl = el('text', {class:'axis-label', x:W - P.r, y:H - 14, 'text-anchor':'end'}); xl.textContent = 'investment';
-  var yl = el('text', {class:'axis-label', x:P.l + 8, y:P.t - 14}); yl.textContent = 'performance';
+  /* the zone fades downwards; the curve runs from cold (too little) to hot (too much) */
+  var defs = el('defs', {});
+  var zg = el('linearGradient', {id:'zone-grad', x1:0, y1:0, x2:0, y2:1}, defs);
+  el('stop', {offset:0, 'stop-color':'#E3A72F', 'stop-opacity':0.3}, zg);
+  el('stop', {offset:1, 'stop-color':'#E3A72F', 'stop-opacity':0.03}, zg);
+  var cg = el('linearGradient', {id:'curve-grad', gradientUnits:'userSpaceOnUse', x1:sx(0), y1:0, x2:sx(1), y2:0}, defs);
+  [[0, '#7FA7D0'], [lo, '#B4BFA8'], [hi, '#C2B3A2'], [1, '#E58F99']].forEach(function(s){ el('stop', {offset:s[0], 'stop-color':s[1]}, cg); });
+
+  var top = P.t - 10, base = H - P.b;
+  el('rect', {class:'zone', x:sx(lo), y:top, width:sx(hi) - sx(lo), height:base - top});
+  el('line', {class:'zone-edge', x1:sx(lo), y1:top, x2:sx(lo), y2:base});
+  el('line', {class:'zone-edge', x1:sx(hi), y1:top, x2:sx(hi), y2:base});
+  label('zone-label', (sx(lo) + sx(hi)) / 2, P.t + 4, 'just right');
+  label('side-label cold', (sx(0) + sx(lo)) / 2 + 14, base - 14, 'too little');
+  label('side-label hot', (sx(hi) + sx(1)) / 2 + 10, base - 14, 'too much');
+  el('path', {class:'axis', d:'M' + P.l + ' ' + top + 'V' + base + 'H' + (W - P.r)});
+  el('path', {class:'axis', d:'M' + (P.l - 5) + ' ' + (top + 7) + 'L' + P.l + ' ' + top + 'L' + (P.l + 5) + ' ' + (top + 7)});
+  el('path', {class:'axis', d:'M' + (W - P.r - 7) + ' ' + (base - 5) + 'L' + (W - P.r) + ' ' + base + 'L' + (W - P.r - 7) + ' ' + (base + 5)});
+  label('axis-label', W - P.r, H - 12, 'investment', 'end');
+  label('axis-label', P.l + 12, top + 6, 'performance', 'start');
   el('polyline', {class:'line', points:pts.join(' ')});
   el('polyline', {class:'line-gold', points:gold.join(' ')});
-  var drop = el('line', {class:'drop', x1:0, y1:0, x2:0, y2:H - P.b});
+  var drop = el('line', {class:'drop', x1:0, y1:0, x2:0, y2:base});
+  var halo = el('circle', {class:'halo', r:9, cx:0, cy:0});
   var dot = el('circle', {class:'dot', r:9, cx:0, cy:0});
 
-  var slider = document.getElementById('invest');
+  /* labels are sized in viewBox units, so tell CSS how many of those make a screen pixel */
+  if (window.ResizeObserver) new ResizeObserver(function(){
+    var w = svg.getBoundingClientRect().width;
+    if (w) fig.style.setProperty('--u', (W / w).toFixed(3));
+  }).observe(svg);
+
+  var val = 4;
   var out = document.getElementById('readout');
   var lastState = '';
   var msgs = {
-    cold:['Too cold.', 'Performance is still climbing, so more investment pays off.'],
-    right:['Just right.', 'Near-peak performance for the resources spent.'],
-    hot:['Too hot.', 'Extra investment has stopped helping and starts to hurt.']
+    cold:['Too little.', 'More investment still helps.'],
+    right:['Just right.', 'Near-peak performance for the cost.'],
+    hot:['Too much.', 'Extra investment stops helping.']
   };
   function update(){
-    var x = slider.value / 100, cx = sx(x), cy = sy(f(x));
+    var x = val / 100, cx = sx(x), cy = sy(f(x));
     dot.setAttribute('cx', cx); dot.setAttribute('cy', cy);
+    halo.setAttribute('cx', cx); halo.setAttribute('cy', cy);
     drop.setAttribute('x1', cx); drop.setAttribute('x2', cx); drop.setAttribute('y1', cy);
     var state = x < lo ? 'cold' : (x > hi ? 'hot' : 'right');
-    dot.style.fill = state === 'right' ? 'var(--honey)' : '#EEF0E4';
     if (state !== lastState){
-      out.dataset.state = state;
+      fig.dataset.state = out.dataset.state = state;
       out.innerHTML = '<strong>' + msgs[state][0] + '</strong>' + msgs[state][1];
       lastState = state;
     }
   }
-  slider.addEventListener('input', function(){ stopped = true; update(); });
+  /* glide the dot into the just-right zone and let it jitter there */
+  var ZLO = lo * 100 + 1.5, ZHI = hi * 100 - 1.5;
+  var lastTs = null, target = (ZLO + ZHI) / 2, nextPick = 0;
   update();
 
-  /* one load-time moment: glide the dot into the zone */
-  var stopped = false;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduce){
-    var start = null, from = 8, to = Math.round(((lo + hi) / 2) * 100), dur = 1800;
-    setTimeout(function(){
-      requestAnimationFrame(function step(ts){
-        if (stopped) return;
-        if (!start) start = ts;
-        var p = Math.min(1, (ts - start) / dur), e = 1 - Math.pow(1 - p, 3);
-        slider.value = Math.round(from + (to - from) * e);
-        update();
-        if (p < 1) requestAnimationFrame(step);
-      });
-    }, 600);
+    requestAnimationFrame(function step(ts){
+      if (lastTs === null) lastTs = ts;
+      var dt = Math.min(ts - lastTs, 100); lastTs = ts;
+      var inside = val >= ZLO && val <= ZHI;
+      if (ts >= nextPick){
+        target = ZLO + Math.random() * (ZHI - ZLO);
+        nextPick = ts + 250 + Math.random() * 450;
+      }
+      /* slow glide from outside the zone, quick jitter once inside */
+      var tau = inside ? 180 : 700;
+      val += ((inside ? target : (ZLO + ZHI) / 2) - val) * (1 - Math.exp(-dt / tau));
+      update();
+      requestAnimationFrame(step);
+    });
   } else {
-    slider.value = Math.round(((lo + hi) / 2) * 100); update();
+    val = (ZLO + ZHI) / 2; update();
   }
 
   /* ---------- highlight the next date ---------- */
@@ -579,6 +802,37 @@ footer a{color:#EEF0E4}
       break;
     }
   }
+  /* ---------- nav: shadow on scroll, highlight current section ---------- */
+  var nav = document.querySelector('.nav');
+  var list = nav.querySelector('ul');
+  var links = list.querySelectorAll('a');
+  var active = null;
+  /* fade whichever edge of the link strip has more links hidden behind it */
+  function edges(){
+    var max = list.scrollWidth - list.clientWidth;
+    list.classList.toggle('fade-l', list.scrollLeft > 4);
+    list.classList.toggle('fade-r', list.scrollLeft < max - 4);
+  }
+  function onScroll(){
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+    var current = null;
+    for (var n = 0; n < links.length; n++){
+      var sec = document.querySelector(links[n].getAttribute('href'));
+      if (sec && sec.getBoundingClientRect().top <= 120) current = links[n];
+    }
+    if (current === active) return;
+    for (var m = 0; m < links.length; m++) links[m].classList.toggle('active', links[m] === current);
+    active = current;
+    /* on narrow screens, keep the highlighted link in view */
+    if (current && list.scrollWidth > list.clientWidth){
+      list.scrollTo({left:current.offsetLeft - (list.clientWidth - current.offsetWidth) / 2, behavior:reduce ? 'auto' : 'smooth'});
+    }
+  }
+  list.addEventListener('scroll', edges, {passive:true});
+  window.addEventListener('resize', edges);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  edges();
+  onScroll();
 })();
 </script>
 </body>
